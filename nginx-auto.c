@@ -51,10 +51,10 @@ void check_for_updates(void) {
             // Construct download and install command for your latest .deb package
             char update_cmd[1024];
             snprintf(update_cmd, sizeof(update_cmd),
-                "curl -sL https://github.com/sizablesplash86-hub/nginx-auto-config/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
-                "sudo apt install -y /tmp/auto-config_update.deb && "
-                "rm /tmp/auto-config_update.deb",
-                latest_version, latest_version + 1 // +1 skips the 'v' prefix if your deb filename uses numbers only (e.g. 1.0.1)
+              "curl -sfL https://github.com/sizablesplash86-hub/nginx-auto-config/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
+              "apt install -y ./tmp/auto-config_update.deb && "
+              "rm -f /tmp/auto-config_update.deb",
+              latest_version, latest_version + 1
             );
 
             int res = system(update_cmd);
