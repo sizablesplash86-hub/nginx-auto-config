@@ -52,7 +52,7 @@ void check_for_updates(void) {
             char update_cmd[1024];
             snprintf(update_cmd, sizeof(update_cmd),
               "curl -sfL https://github.com/sizablesplash86-hub/nginx-auto-config/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
-              "apt install -y ./tmp/auto-config_update.deb && "
+              "dpkg -i /tmp/auto-config_update.deb && "
               "rm -f /tmp/auto-config_update.deb",
               latest_version, latest_version + 1
             );
