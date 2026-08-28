@@ -1,0 +1,5 @@
+nano auto-config-pkg/DEBIAN/control #change version release
+git status
+git add .
+git commit -m "INSERT CHANGE HERE"
+git push origin main
