@@ -7,6 +7,12 @@
 #include <stdlib.h> //chapter 26.2 682
 #define CURRENT_VERSION "v1.0.3"
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
+#define STR_LEN 256
+
+char config_name[STR_LEN];
+char domain_name[STR_LEN];
+char target[STR_LEN];
+char config_type_input[STR_LEN];
 
 void check_for_updates(void) {
     char command[512];
@@ -50,11 +56,7 @@ void check_for_updates(void) {
                 "rm /tmp/auto-config_update.deb",
                 latest_version, latest_version + 1 // +1 skips the 'v' prefix if your deb filename uses numbers only (e.g. 1.0.1)
             );
-#define STR_LEN 256 // chapter 13.2 page 281
-char config_name[STR_LEN];
-char domain_name[STR_LEN];
-char target[STR_LEN];
-char config_type_input[STR_LEN]; // Added variable declaration
+
             int res = system(update_cmd);
             if (res == 0) {
                 printf("\nUpgrade completed successfully! Please restart the app.\n");
@@ -65,11 +67,6 @@ char config_type_input[STR_LEN]; // Added variable declaration
         }
     }
 }
-
-/*#define STR_LEN 256 //chapter 13.2 page 281
-char config_name[STR_LEN];
-char domain_name[STR_LEN];
-char target[STR_LEN];*/
 
 int main()
 
@@ -111,7 +108,8 @@ int main()
       fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
       config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
     
-    int config_type = 0;
+    /*some broken config would go here:
+      int config_type = 0;
     while (config_type != 1 && config_type != 2)
     {
       printf("Enter type of config (1 for Reverse Proxy, 2 for Directory/Static Site): ");
@@ -135,9 +133,9 @@ int main()
       printf("Enter root directory path (ex: /var/www/html): ");
       fgets(target, sizeof(target), stdin); 
       target[strcspn(target, "\n")] = 0;
-    }
-    
-/*  printf("enter type of config: 1. for Proxy 2. for Directory: ");
+    } */
+
+    printf("enter type of config: 1. for Proxy 2. for Directory: ");
 
     printf("Enter proxy number (ex: 8096): ");
       fgets(target, sizeof(target), stdin);
@@ -178,7 +176,7 @@ int main()
       domain_name, target
     );
 
-    fclose(fp);  */
+    fclose(fp);
 
     char enabled_path[STR_LEN];
     snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/%s", config_name);
