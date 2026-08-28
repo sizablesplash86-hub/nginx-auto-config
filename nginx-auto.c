@@ -108,7 +108,7 @@ int main()
       fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
       config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
     
-    /*some broken config would go here:
+    
       int config_type = 0;
     while (config_type != 1 && config_type != 2)
     {
@@ -133,9 +133,9 @@ int main()
       printf("Enter root directory path (ex: /var/www/html): ");
       fgets(target, sizeof(target), stdin); 
       target[strcspn(target, "\n")] = 0;
-    } */
+    } 
 
-    printf("enter type of config: 1. for Proxy 2. for Directory: ");
+    //printf("enter type of config: 1. for Proxy 2. for Directory: ");
 
     printf("Enter proxy number (ex: 8096): ");
       fgets(target, sizeof(target), stdin);
