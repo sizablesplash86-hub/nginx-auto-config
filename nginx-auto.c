@@ -6,15 +6,15 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #define CURRENT_VERSION "v1.0.2"
-#define REPO_URL "https://github.com/sizablesplash86-hub/nginx-auto-config"
+#define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
 
 void check_for_updates(void) {
     char command[512];
     char latest_version[64] = {0};
 
-    // Use curl to fetch the "tag_name" field from GitHub's API
+    // Use curl to fetch the "tag_name" field from GitHub's API (User-Agent added so GitHub doesn't block it)
     snprintf(command, sizeof(command),
-        "curl -s %s | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/'",
+        "curl -s -H \"User-Agent: auto-config-app\" %s | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/'",
         REPO_URL
     );
 
@@ -45,10 +45,10 @@ void check_for_updates(void) {
             // Construct download and install command for your latest .deb package
             char update_cmd[1024];
             snprintf(update_cmd, sizeof(update_cmd),
-                "curl -sL https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
-                "sudo apt install -y /tmp/auto-config_update.deb && "
+                "curl -sL https://github.com/sizablesplash86-hub/nginx-auto-config/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
+                "apt install -y /tmp/auto-config_update.deb && "
                 "rm /tmp/auto-config_update.deb",
-                latest_version, latest_version + 1 // +1 skips the 'v' prefix if your deb filename uses numbers only (e.g. 1.0.1)
+                latest_version, latest_version + 1 // +1 skips the 'v' prefix for deb file name (e.g., 1.0.2)
             );
 
             int res = system(update_cmd);
@@ -93,28 +93,22 @@ int main()
     else
     { 
       printf("NGINX & CERTBOT NOT INSTALLED! Installing now...\n");
-      system("sudo apt update && sudo apt install -y nginx certbot python3-certbot-nginx");
+      system("apt update && apt install -y nginx certbot python3-certbot-nginx");
     }
     printf("press enter to continue: ");
     getchar();
 
-//  printf("Would you like to do a manual config file with this? (Y or N): ");
-//  printf("Would you like to select from presets? (Y or N): ");
-
-    //check for existing config later
-
     printf("Enter name of config: ");
-      fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
-      config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
+    fgets(config_name, sizeof(config_name), stdin); //fgets in chapters 13 & 22, appendix 761, stdin on page 541
+    config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
     
-//  printf("enter type of config: 1. for Proxy 2. for Directory: ");
     printf("Enter proxy number (ex: 8096): ");
-      fgets(target, sizeof(target), stdin); //EDIT THESE HERE
-      target[strcspn(target, "\n")] = 0;
+    fgets(target, sizeof(target), stdin); 
+    target[strcspn(target, "\n")] = 0;
 
     printf("Enter your domain name: ");
-      fgets(domain_name, sizeof(domain_name), stdin);
-      domain_name[strcspn(domain_name, "\n")] = 0;
+    fgets(domain_name, sizeof(domain_name), stdin);
+    domain_name[strcspn(domain_name, "\n")] = 0;
 
     printf("Press enter to create the config: ");
     getchar();
@@ -126,7 +120,7 @@ int main()
     if (fp == NULL)
     {
       perror("FILE COULD NOT BE OPENED");
-    return 1;
+      return 1;
     }
     fprintf(fp, //chapter 22.3 page 552
       "server {\n"
@@ -156,12 +150,10 @@ int main()
     if (symlink(avail_path, enabled_path) != 0) 
     {
       perror("Failed to create symlink");
-      // Handle error...
     }
 
-    system("sudo nginx -t");
-
-    if (system("sudo nginx -t") != 0)
+    // Verify configuration syntax and rollback if invalid
+    if (system("nginx -t") != 0)
     {
       unlink(avail_path);   // Deletes /etc/nginx/sites-available/CONFIGNAME
       unlink(enabled_path); // Deletes /etc/nginx/sites-enabled/CONFIGNAME
@@ -170,29 +162,13 @@ int main()
     }
 
     char certbot_cmd[STR_LEN * 2];
-    snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
+    snprintf(certbot_cmd, sizeof(certbot_cmd), "certbot --nginx -d %s", domain_name);
     system(certbot_cmd);
 
   }
   else
   {
-    printf("ROOT SYSTEM NOT DETECTED! Run the command 'su' before attempting again\n\n");
+    printf("ROOT SYSTEM NOT DETECTED! Run the command 'su' or use 'sudo' before attempting again\n\n");
   }
   return 0;
 }
-
-/*Steps when command is run:
-// check root. If in root, continue. if not, exit.
-// check if nginx & certbot python3-certbot-nginx are installed. If not, install nginx & certbot python3-certbot-nginx
-   if existing config exists, ask 1. you want to adjust the config (figure those decisions out later) 2. create a new config
-   if 2. ask for config name
-   ask proxy or directory
-   input proxy/directory
-   ask for domain name
-   create config in /etc/nginx/sites-available/CONFIGNAME
-   link it to /etc/nginx/sites-enabled
-   run sudo nginx -t
-   if fails, delete config in /etc/nginx/sites-available and /etc/nginx/sites-enabled and return "unknown error occured"
-   if passes, prompt certbot and ask to press Y or N to generate certificate
-   if y, generate certificate. If successful, run sudo systemctl reload nginx and print "config completed succesfully" if N, cancel but leave config. 
-*/
