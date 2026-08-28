@@ -6,7 +6,7 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #define CURRENT_VERSION "v1.0.3"
-#define REPO_URL "https://github.com/sizablesplash86-hub/nginx-auto-config"
+#define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
 
 void check_for_updates(void) {
     char command[512];
@@ -14,7 +14,7 @@ void check_for_updates(void) {
 
     // Use curl to fetch the "tag_name" field from GitHub's API
     snprintf(command, sizeof(command),
-        "curl -s %s | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/'",
+        "curl -s -H \"User-Agent: auto-config-app\" %s | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/'",
         REPO_URL
     );
 
@@ -50,7 +50,11 @@ void check_for_updates(void) {
                 "rm /tmp/auto-config_update.deb",
                 latest_version, latest_version + 1 // +1 skips the 'v' prefix if your deb filename uses numbers only (e.g. 1.0.1)
             );
-
+#define STR_LEN 256 // chapter 13.2 page 281
+char config_name[STR_LEN];
+char domain_name[STR_LEN];
+char target[STR_LEN];
+char config_type_input[STR_LEN]; // Added variable declaration
             int res = system(update_cmd);
             if (res == 0) {
                 printf("\nUpgrade completed successfully! Please restart the app.\n");
@@ -62,10 +66,10 @@ void check_for_updates(void) {
     }
 }
 
-#define STR_LEN 256 //chapter 13.2 page 281
+/*#define STR_LEN 256 //chapter 13.2 page 281
 char config_name[STR_LEN];
 char domain_name[STR_LEN];
-char target[STR_LEN];
+char target[STR_LEN];*/
 
 int main()
 
