@@ -5,6 +5,62 @@
 #include <float.h> //page 589 chapter 23.1
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
+#define CURRENT_VERSION "v1.0.0"
+#define REPO_URL "https://github.com/sizablesplash86-hub/nginx-auto-config"
+
+void check_for_updates(void) {
+    char command[512];
+    char latest_version[64] = {0};
+
+    // Use curl to fetch the "tag_name" field from GitHub's API
+    snprintf(command, sizeof(command),
+        "curl -s %s | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/'",
+        REPO_URL
+    );
+
+    FILE *fp = popen(command, "r");
+    if (fp == NULL) {
+        return; // Skip update check if curl fails
+    }
+
+    if (fgets(latest_version, sizeof(latest_version), fp) != NULL) {
+        // Strip trailing newline character
+        latest_version[strcspn(latest_version, "\r\n")] = '\0';
+    }
+    pclose(fp);
+
+    // If a tag was returned and it does not match our current version
+    if (strlen(latest_version) > 0 && strcmp(latest_version, CURRENT_VERSION) != 0) {
+        printf("=========================================\n");
+        printf("Update detected! (%s -> %s)\n", CURRENT_VERSION, latest_version);
+        printf("Would you like to upgrade? (y/n): ");
+
+        char ans;
+        scanf(" %c", &ans);
+        while (getchar() != '\n'); // Clear input buffer
+
+        if (ans == 'y' || ans == 'Y') {
+            printf("\nDownloading and installing latest package...\n");
+
+            // Construct download and install command for your latest .deb package
+            char update_cmd[1024];
+            snprintf(update_cmd, sizeof(update_cmd),
+                "curl -sL https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
+                "sudo apt install -y /tmp/auto-config_update.deb && "
+                "rm /tmp/auto-config_update.deb",
+                latest_version, latest_version + 1 // +1 skips the 'v' prefix if your deb filename uses numbers only (e.g. 1.0.1)
+            );
+
+            int res = system(update_cmd);
+            if (res == 0) {
+                printf("\nUpgrade completed successfully! Please restart the app.\n");
+                exit(0);
+            } else {
+                printf("\nUpgrade failed. Continuing with current version...\n\n");
+            }
+        }
+    }
+}
 
 #define STR_LEN 256 //chapter 13.2 page 281
 char config_name[STR_LEN];
@@ -14,7 +70,7 @@ char target[STR_LEN];
 int main()
 
 {
-  //figure out how to do updates too
+  check_for_updates();
   printf("\nWelcome to the NGINX auto config version 1.0!\n\n");
 
   printf("Before you continue, make sure you are in root. Press enter to scan: ");
