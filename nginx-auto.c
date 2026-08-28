@@ -5,7 +5,7 @@
 #include <float.h> //page 589 chapter 23.1
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
-#define CURRENT_VERSION "v1.0.0"
+#define CURRENT_VERSION "v1.0.2"
 #define REPO_URL "https://github.com/sizablesplash86-hub/nginx-auto-config"
 
 void check_for_updates(void) {
