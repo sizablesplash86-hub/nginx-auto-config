@@ -5,7 +5,7 @@
 #include <float.h> //page 589 chapter 23.1
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
-#define CURRENT_VERSION "v1.0.2"
+#define CURRENT_VERSION "v1.0.3"
 #define REPO_URL "https://github.com/sizablesplash86-hub/nginx-auto-config"
 
 void check_for_updates(void) {
@@ -71,7 +71,7 @@ int main()
 
 {
   check_for_updates();
-  printf("\nWelcome to the NGINX auto config version 1.0!\n\n");
+  printf("\nWelcome to the NGINX auto config version 1.0.3!\n\n");
 
   printf("Before you continue, make sure you are in root. Press enter to scan: ");
 
@@ -107,9 +107,36 @@ int main()
       fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
       config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
     
-//  printf("enter type of config: 1. for Proxy 2. for Directory: ");
+    int config_type = 0;
+    while (config_type != 1 && config_type != 2)
+    {
+      printf("Enter type of config (1 for Reverse Proxy, 2 for Directory/Static Site): ");
+      fgets(config_type_input, sizeof(config_type_input), stdin);
+      config_type = atoi(config_type_input);
+
+      if (config_type != 1 && config_type != 2)
+      {
+        printf("Invalid choice. Please enter 1 or 2.\n");
+      }
+    }
+
+    if (config_type == 1)
+    {
+      printf("Enter proxy port (ex: 8096): ");
+      fgets(target, sizeof(target), stdin); 
+      target[strcspn(target, "\n")] = 0;
+    }
+    else
+    {
+      printf("Enter root directory path (ex: /var/www/html): ");
+      fgets(target, sizeof(target), stdin); 
+      target[strcspn(target, "\n")] = 0;
+    }
+    
+/*  printf("enter type of config: 1. for Proxy 2. for Directory: ");
+
     printf("Enter proxy number (ex: 8096): ");
-      fgets(target, sizeof(target), stdin); //EDIT THESE HERE
+      fgets(target, sizeof(target), stdin);
       target[strcspn(target, "\n")] = 0;
 
     printf("Enter your domain name: ");
@@ -147,7 +174,7 @@ int main()
       domain_name, target
     );
 
-    fclose(fp);
+    fclose(fp);  */
 
     char enabled_path[STR_LEN];
     snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/%s", config_name);
