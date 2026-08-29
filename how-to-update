@@ -23,12 +23,12 @@ sudo apt install ./auto-config_1.0.0_amd64.deb
 to update:
 
 rm auto-config-pkg/usr/local/bin/auto-config
-rm auto-config_1.x.x_amd64.deb
+rm auto-config_1.1.0_amd64.deb
 gcc -O2 nginx-auto.c -o auto-config-pkg/usr/local/bin/auto-config
-dpkg-deb --build auto-config-pkg auto-config_1.x.x_amd64.deb
+dpkg-deb --build auto-config-pkg auto-config_1.1.0_amd64.deb
 nano auto-config-pkg/DEBIAN/control #change version release
 git status
-git add auto-config-pkg/DEBIAN/control auto-config_1.x.x_amd64.deb
+git add auto-config-pkg/DEBIAN/control auto-config_1.1.0_amd64.deb
 git add .
 git commit -m "INSERT CHANGE HERE"
 git push origin main
