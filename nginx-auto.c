@@ -6,7 +6,7 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #include <ctype.h> //chapter 7 somewhere
-#define CURRENT_VERSION "v1.0.5"
+#define CURRENT_VERSION "v1.1.0"
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
 #define STR_LEN 256
 
@@ -73,7 +73,7 @@ int main()
 
 {
   check_for_updates();
-  printf("\nWelcome to the NGINX auto config version 1.0.5!\n\n");
+  printf("\nWelcome to the NGINX auto config version 1.1.0!\n\n");
 
   printf("Before you continue, make sure you are in root. Press enter to scan: ");
 
