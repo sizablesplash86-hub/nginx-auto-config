@@ -51,13 +51,22 @@ void check_for_updates(void) {
         if (ans == 'y' || ans == 'Y') {
             printf("\nDownloading and installing latest package...\n");
 
-            char update_cmd[1024];
+            /*char update_cmd[1024];
             snprintf(update_cmd, sizeof(update_cmd),
               "curl -sfL https://github.com/sizablesplash86-hub/nginx-auto-config/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
               "dpkg -i /tmp/auto-config_update.deb || apt-get install -f -y && "
               "rm -f /tmp/auto-config_update.deb",
               latest_version, latest_version + 1
-            );
+            );*/
+
+            const char *ver_num = (latest_version[0] == 'v') ? latest_version + 1 : latest_version;
+            char update_cmd[1024];
+            snprintf(update_cmd, sizeof(update_cmd),
+                "curl -sfL https://github.com/sizablesplash86-hub/nginx-auto-config/releases/download/%s/auto-config_%s_amd64.deb -o /tmp/auto-config_update.deb && "
+                "dpkg -i /tmp/auto-config_update.deb || apt-get install -f -y && "
+                "rm -f /tmp/auto-config_update.deb",
+                latest_version, ver_num
+              );
 
             int res = system(update_cmd);
             if (res == 0) {
@@ -349,7 +358,7 @@ int main()
               }
 
               system("sudo nginx -t");
-
+    
               if (system("sudo nginx -t") != 0)
               {
                 unlink(avail_path);
@@ -373,11 +382,6 @@ int main()
             //where the presets end
             return 0;
           }
-    /*
-    else
-        {
-          
-        } */
         
     if (strcasecmp(preset, "n") == 0)
     {
