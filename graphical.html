@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <h2>NGINX Auto Config</h2>
+
+                <div class="form-group">
+                    <label for="preset">Configuration</label>
+                    <select id="preset" onchange="ToggleFields()">
+                        <option value="Jellyfin">Jellyfin</option>
+                        <option value="Nextcloud">Nextcloud</option>
+                        <option value="Directory">Directory</option>
+                        <option value="Proxy">Proxy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="domain">Domain Name</label>
+                </div>
+ 
+                <div class="form-group" id="port">
+                    <label for="port">Port</label>
+                </div>
+
+                <div class="form-group" id="directory" style="display: none">
+                    <label for="directory">Directory for website</label>
+                </div>
+
+                <div class="form-group" id="php" style="display: none">
+                    <label for="php">PHP Version</label>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Generated NGINX Config</h2>
+                <pre id="output"></pre>
+                <button class="btn-copy" onclick="copyConfig()">Copy Configuration</button>
+            </div>
+        </div>
+
+        <script>
+function toggleFields() {
+    const preset = document.getElementById('preset').value;
+    const portGroup = document.getElementById('port-group');
+    const pathGroup = document.getElementById('path-group');
+    const phpGroup = document.getElementById('php-group');
+
+    portGroup.style.display = 'none';
+    pathGroup.style.display = 'none';
+    phpGroup.style.display = 'none';
+
+    if (preset === 'jellyfin') {
+        portGroup.style.display = 'block';
+        document.getElementById('port').value = '8096';
+    } else if (preset === 'nextcloud') {
+        phpGroup.style.display = 'block';
+        pathGroup.style.display = 'block';
+        document.getElementById('path').value = '/var/www/nextcloud';
+    } else if (preset === 'custom_proxy') {
+        portGroup.style.display = 'block';
+    } else if (preset === 'custom_static') {
+        pathGroup.style.display = 'block';
+    }
+
+    generateConfig();
+}
+
+function generateConfig() {
+    const preset = document.getElementById('preset').value;
+    const domain = document.getElementById('domain').value || 'example.com';
+    const port = document.getElementById('port').value || '8080';
+    const path = document.getElementById('path').value || '/var/www/html';
+    const phpver = document.getElementById('phpver').value || '8.2';
+    
+    let config = '';
+
+    if (preset === 'jellyfin') {
+        config = `server {
+    server_name ${domain};
+
+    location / {
+        proxy_pass http://127.0.0.1:${port};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Protocol $scheme;
+        proxy_set_header X-Forwarded-Host $http_host;
+        
+        # WebSockets support
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}`;
+    } else if (preset === 'nextcloud') {
+        config = `upstream php-handler {
+    server unix:/run/php/php${phpver}-fpm.sock;
+}
+
+server {
+    listen 80;
+    server_name ${domain};
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name ${domain};
+    root ${path};
+
+    client_max_body_size 512M;
+    client_body_timeout 300s;
+
+    location / {
+        try_files $uri $uri/ /index.php$request_uri;
+    }
+
+    location ~ \\.php$ {
+        include fastcgi_params;
+        fastcgi_pass php-handler;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+}`;
+    } else if (preset === 'custom_proxy') {
+        config = `server {
+    server_name ${domain};
+
+    location / {
+        proxy_pass http://127.0.0.1:${port};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}`;
+    } else if (preset === 'custom_static') {
+        config = `server {
+    server_name ${domain};
+    root ${path};
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}`;
+    }
+
+    document.getElementById('output').textContent = config;
+}
+
+function copyConfig() {
+    const text = document.getElementById('output').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Configuration copied to clipboard!');
+    });
+}
+
+// Initial render
+generateConfig();
+</script>
+    </body>
+</html>

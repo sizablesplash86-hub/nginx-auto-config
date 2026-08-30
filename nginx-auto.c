@@ -6,6 +6,7 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #include <ctype.h> //chapter 7 somewhere
+
 #define CURRENT_VERSION "v1.1.0"
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
 #define STR_LEN 256
@@ -73,7 +74,8 @@ int main()
 
 {
   check_for_updates();
-  printf("\nWelcome to the NGINX auto config version 1.1.0!\n\n");
+  printf("\nWelcome to the NGINX auto config version 1.1.0!\n");
+  printf("This config code is intended to work with my server guide at https://www.sizablesplash.com/server-guide\n\n");
 
   printf("Before you continue, make sure you are in root. Press enter to scan: ");
 
@@ -204,7 +206,7 @@ int main()
               if (strlen(php_ver) > 0)
               {
                 snprintf(php_sock, sizeof(php_sock), "/run/php/php%s-fpm.sock", php_ver);
-                printf("PHP %s installed! -> using socket %s\n", php_ver, php_sock);
+                printf("PHP %s is installed! -> using socket %s\n", php_ver, php_sock);
               }
               else
               {
@@ -371,119 +373,129 @@ int main()
             //where the presets end
             return 0;
           }
-        else
+    /*
+    else
         {
           
-        }
+        } */
+        
+    if (strcasecmp(preset, "n") == 0)
+    {
       
-    printf("Enter name of config: ");
-      fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
-      config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
-    
-    int config_type = 0;
-    while (config_type != 1 && config_type != 2)
-    {
-      printf("Enter type of config (1 for Reverse Proxy, 2 for Directory/Static Site): ");
-      fgets(config_type_input, sizeof(config_type_input), stdin);
-      config_type = atoi(config_type_input);
-
-      if (config_type != 1 && config_type != 2)
+      printf("Enter name of config: ");
+        fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
+        config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
+      
+      int config_type = 0;
+      while (config_type != 1 && config_type != 2)
       {
-        printf("Invalid choice. Please enter 1 or 2.\n");
+        printf("Enter type of config (1 for Reverse Proxy, 2 for Directory/Static Site): ");
+        fgets(config_type_input, sizeof(config_type_input), stdin);
+        config_type = atoi(config_type_input);
+
+        if (config_type != 1 && config_type != 2)
+        {
+          printf("Invalid choice. Please enter 1 or 2.\n");
+        }
       }
-    }
 
-    if (config_type == 1)
-    {
-      printf("Enter proxy port (ex: 8096): ");
-      fgets(target, sizeof(target), stdin); 
-      target[strcspn(target, "\n")] = 0;
-    }
-    else
-    {
-      printf("Enter root directory path (ex: /var/www/html): ");
-      fgets(target, sizeof(target), stdin); 
-      target[strcspn(target, "\n")] = 0;
-    } 
+      if (config_type == 1)
+      {
+        printf("Enter proxy port (ex: 8096): ");
+        fgets(target, sizeof(target), stdin); 
+        target[strcspn(target, "\n")] = 0;
+      }
+      else
+      {
+        printf("Enter root directory path (ex: /var/www/html): ");
+        fgets(target, sizeof(target), stdin); 
+        target[strcspn(target, "\n")] = 0;
+      } 
 
-    printf("Enter your domain name: ");
-    fgets(domain_name, sizeof(domain_name), stdin);
-    domain_name[strcspn(domain_name, "\n")] = 0;
+      printf("Enter your domain name: ");
+      fgets(domain_name, sizeof(domain_name), stdin);
+      domain_name[strcspn(domain_name, "\n")] = 0;
 
-    printf("Press enter to create the config: ");
-    getchar();
+      printf("Press enter to create the config: ");
+      getchar();
 
-    char avail_path[STR_LEN];
-    snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/%s", config_name);
+      char avail_path[STR_LEN];
+      snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/%s", config_name);
 
-    FILE *fp = fopen(avail_path, "w");
-    if (fp == NULL)
-    {
-      perror("FILE COULD NOT BE OPENED");
-      return 1;
-    }
+      FILE *fp = fopen(avail_path, "w");
+      if (fp == NULL)
+      {
+        perror("FILE COULD NOT BE OPENED");
+        return 1;
+      }
 
-    if (config_type == 1)
-    {
-        fprintf(fp,
-          "server {\n"
-          "  server_name %s;\n\n"
-          "  location / {\n"
-          "    proxy_pass http://127.0.0.1:%s;\n"
-          "    proxy_set_header Host $host;\n"
-          "    proxy_set_header X-Real-IP $remote_addr;\n"
-          "    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n"
-          "    proxy_set_header X-Forwarded-Proto $scheme;\n"
-          "    proxy_set_header X-Forwarded-Protocol $scheme;\n"
-          "    proxy_set_header X-Forwarded-Host $http_host;\n"
-          "    proxy_http_version 1.1;\n"
-          "    proxy_set_header Upgrade $http_upgrade;\n"
-          "    proxy_set_header Connection \"upgrade\";\n"
-          "  }\n"
-          "}\n",
-          domain_name, target
-        );
-    }
-    else
-    {
-        fprintf(fp,
-          "server {\n"
-          "  server_name %s;\n\n"
-          "  root %s;\n"
-          "  index index.html index.htm;\n\n"
-          "  location / {\n"
-          "    try_files $uri $uri/ =404;\n"
-          "  }\n"
-          "}\n",
-          domain_name, target
-        );
-    }
+      if (config_type == 1)
+      {
+          fprintf(fp,
+            "server {\n"
+            "  server_name %s;\n\n"
+            "  location / {\n"
+            "    proxy_pass http://127.0.0.1:%s;\n"
+            "    proxy_set_header Host $host;\n"
+            "    proxy_set_header X-Real-IP $remote_addr;\n"
+            "    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n"
+            "    proxy_set_header X-Forwarded-Proto $scheme;\n"
+            "    proxy_set_header X-Forwarded-Protocol $scheme;\n"
+            "    proxy_set_header X-Forwarded-Host $http_host;\n"
+            "    proxy_http_version 1.1;\n"
+            "    proxy_set_header Upgrade $http_upgrade;\n"
+            "    proxy_set_header Connection \"upgrade\";\n"
+            "  }\n"
+            "}\n",
+            domain_name, target
+          );
+      }
+      else
+      {
+          fprintf(fp,
+            "server {\n"
+            "  server_name %s;\n\n"
+            "  root %s;\n"
+            "  index index.html index.htm;\n\n"
+            "  location / {\n"
+            "    try_files $uri $uri/ $uri/index.html $uri.html =404;\n"
+            "  }\n"
+            "}\n",
+            domain_name, target
+          );
+      }
 
-    fclose(fp);
+      fclose(fp);
 
-    char enabled_path[STR_LEN];
-    snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/%s", config_name);
+      char enabled_path[STR_LEN];
+      snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/%s", config_name);
 
-    if (symlink(avail_path, enabled_path) != 0) 
-    {
-      perror("Failed to create symlink");
-    }
+      if (symlink(avail_path, enabled_path) != 0) 
+      {
+        perror("Failed to create symlink");
+      }
 
-    system("sudo nginx -t");
-
-    if (system("sudo nginx -t") != 0)
-    {
-      unlink(avail_path);
-      unlink(enabled_path);
-      printf("Unknown error occurred. Config rollbacked.\n");
       system("sudo nginx -t");
-      return 1;
+
+      if (system("sudo nginx -t") != 0)
+      {
+        unlink(avail_path);
+        unlink(enabled_path);
+        printf("Unknown error occurred. Config rollbacked.\n");
+        system("sudo nginx -t");
+        return 1;
+      }
+
+      char certbot_cmd[STR_LEN * 2];
+      snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
+      system(certbot_cmd);
+
+      printf("Certificate successfully deployed! Exiting now...\n");
     }
-
-    char certbot_cmd[STR_LEN * 2];
-    snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
-    system(certbot_cmd);
-
+    else
+    {
+      printf("\033[31mERROR\033[0m run auto-config again and enter correct variable\n\n"); //add in probably a v2.0 to have it work better cuz I don't feel like adding all the code needed
+    }
   }
   else
   {
