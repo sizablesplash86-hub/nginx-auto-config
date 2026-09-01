@@ -1,0 +1,4 @@
+in order for the graphical to work, run nano /etc/sudoers.d/nginx-auto and paste www-data ALL=(ALL) NOPASSWD: /usr/bin/nginx -t, /usr/bin/systemctl reload nginx, /usr/bin/cp /tmp/*.conf /etc/nginx/sites-available/
+
+the graphical install HTMl code is stored in /mnt/code-projects/packages/auto-config/auto-config-pkg/var/www/auto-config/
+the program for installing and creating it is located in /mnt/code-projects/packages/auto-config/auto-config-pkg/DEBIAN/postinst

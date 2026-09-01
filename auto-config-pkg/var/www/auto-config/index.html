@@ -92,7 +92,7 @@
             height: 400px;
         }
 
-        .btn-copy {
+        .btn-generate {
             background-color: var(--accent-color);
             color: white;
             border: none;
@@ -104,7 +104,7 @@
             margin-top: 10px;
         }
 
-        .btn-copy:hover {
+        .btn-generate:hover {
             background-color: var(--accent-hover);
         }
     </style>
@@ -151,7 +151,7 @@
     <div class="card">
         <h2>Generated NGINX Config</h2>
         <pre id="output"></pre>
-        <button class="btn-copy" onclick="copyConfig()">Copy Configuration</button>
+        <button class="btn-generate" onclick="applyConfig()">Generate Configuration</button>
     </div>
 </div>
 
@@ -266,11 +266,22 @@ server {
     document.getElementById('output').textContent = config;
 }
 
-function copyConfig() {
-    const text = document.getElementById('output').textContent;
-    navigator.clipboard.writeText(text).then(() => {
-        alert('Configuration copied to clipboard!');
-    });
+async function applyConfig() {
+    const domain = document.getElementById('domain').value;
+    const configText = document.getElementById('output').textContent;
+
+    try {
+        const response = await fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ domain: domain, config: configText })
+        });
+
+        const result = await response.json();
+        alert(result.message || result.error);
+    } catch (err) {
+        alert('Failed to connect to backend: ' + err.message);
+    }
 }
 
 // Initial render

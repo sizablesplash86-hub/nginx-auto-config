@@ -1,13 +1,14 @@
 //NGINX auto config
 //sources from C Programming A Modern Approach Second Edition by: K. N. King
-#include <stdio.h>
+#include <stdio.h> //standard functions
 #include <unistd.h> //not in the book, wrote it down on page 748 & notes page tho
 #include <float.h> //page 589 chapter 23.1
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #include <ctype.h> //chapter 7 somewhere
+#include "config.h" //chapter 15.2 p.350
 
-#define CURRENT_VERSION "v1.1.2"
+#define CURRENT_VERSION "v1.1.4"
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
 #define STR_LEN 256
 
@@ -18,6 +19,22 @@ char config_type_input[STR_LEN];
 char preset[STR_LEN];
 char preset_choice[STR_LEN];
 char php_ver[STR_LEN];
+
+void get_nginx_test_error(char *buffer, size_t max_len)
+{
+    // Redirect stderr (2) to stdout (1) so popen reads Nginx test errors
+    FILE *fp = popen("sudo nginx -t 2>&1", "r");
+    if (fp == NULL)
+    {
+        snprintf(buffer, max_len, "Failed to run nginx -t command.");
+        return;
+    }
+
+    size_t bytes_read = fread(buffer, 1, max_len - 1, fp);
+    buffer[bytes_read] = '\0'; // Ensure string is null-terminated
+
+    pclose(fp);
+}
 
 void check_for_updates(void) {
     char command[512];
@@ -79,11 +96,72 @@ void check_for_updates(void) {
     }
 }
 
+void offer_troubleshooting(const char *error_log)
+{
+  char ans;
+  char usr[STR_LEN];
+  printf("Would you like to send a discord notification to me for troubleshooting? (y or n): ");
+  scanf(" %c", &ans); //chapter 7.3 page 139
+
+  if (ans == 'y')
+  {
+    printf("Enter a nickname: ");
+    scanf(" %255s", usr);
+    
+    printf("Sending report to my discord server... If you desire to join, https://discord.gg/HjvadzcdzB\n");
+
+    char clean_log[STR_LEN * 4] = {0};
+    int j = 0;
+    for (int i = 0; error_log[i] != '\0' && j < (sizeof(clean_log) - 4); i++)
+    {
+      if (error_log[i] == '"')
+      {
+        clean_log[j++] = '\\';
+        clean_log[j++] = '"';
+      }
+      else if (error_log[i] == '\n')
+      {
+        clean_log[j++] = '\\';
+        clean_log[j++] = 'n';
+      }
+      else
+      {
+        clean_log[j++] = error_log[i];
+      }
+    }
+
+    char curl_cmd[STR_LEN * 8];
+    snprintf(curl_cmd, sizeof(curl_cmd),
+      "curl -s -X POST \"https://discord.com/api/v10/channels/%s/messages\" "
+      "-H \"Authorization: Bot %s\" "
+      "-H \"Content-Type: application/json\" "
+      "-d '{\"content\": \"**[Nginx-Auto Error Report]**\\n**User:** %s\\n```\\n%s\\n```\"}' > /dev/null",
+      DISCORD_CHANNEL_ID, DISCORD_BOT_TOKEN, usr, clean_log
+    );
+
+    int res = system(curl_cmd);
+
+    if (res == 0)
+    {
+      printf("Report successfully sent!\n");  //add a part for messaging back and forth
+    }
+    else
+    {
+      printf("\033[31mERROR\033[0m Message failed to send.\n\n");
+    }
+  }
+  if (ans == 'n')
+  {
+    printf("Log not sent. Exiting now...\n\n");
+  }
+}
+
 int main()
 
 {
   check_for_updates();
-  printf("\nWelcome to the NGINX auto config version 1.1.2!\n");
+  printf("\nWelcome to the NGINX auto config version 1.1.4!\n");
+//printf("Visit port 3487 in your browser to see the graphical install (IN DEVELOPMENT! NOT READY TO USE!)\n\n");
   printf("This config code is intended to work with my server guide at https://www.sizablesplash.com/server-guide\n\n");
 
   printf("Before you continue, make sure you are in root. Press enter to scan: ");
@@ -169,16 +247,24 @@ int main()
               if (symlink(avail_path, enabled_path) != 0) 
               {
                 perror("\033[31mFailed to create symlink\033[0m");
+                
               }
 
               system("sudo nginx -t");
 
               if (system("sudo nginx -t") != 0)
+
+              if (system("sudo nginx -t") != 0)
               {
+                char nginx_error[1024] = {0};
+
+                get_nginx_test_error(nginx_error, sizeof(nginx_error));
+
                 unlink(avail_path);
                 unlink(enabled_path);
                 printf("\033[31mUnknown error occurred.\033[0m Config rollbacked.\n\n");
                 system("sudo nginx -t");
+                offer_troubleshooting(nginx_error);
                 return 0;
               }
 
@@ -361,10 +447,15 @@ int main()
     
               if (system("sudo nginx -t") != 0)
               {
+                char nginx_error[1024] = {0};
+
+                get_nginx_test_error(nginx_error, sizeof(nginx_error));
+
                 unlink(avail_path);
                 unlink(enabled_path);
                 printf("\033[31mUnknown error occurred.\033[0m Config rollbacked.\n\n");
                 system("sudo nginx -t");
+                offer_troubleshooting(nginx_error);
                 return 0;
               }
 
@@ -387,8 +478,8 @@ int main()
     {
       
       printf("Enter name of config: ");
-        fgets(config_name, sizeof(config_name), stdin); //fgets are supposed to be in chapters 13 & 22 but I didn't see them other than the appendix 761 and stdin is on page 541
-        config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6
+        fgets(config_name, sizeof(config_name), stdin); //fgets 22.5 p.570 appendix 761 and stdin chapter 22.1 page 541 & 570 not in appendix
+        config_name[strcspn(config_name, "\n")] = 0; //chapter 23.6 appendix p.784
       
       int config_type = 0;
       while (config_type != 1 && config_type != 2)
@@ -483,16 +574,22 @@ int main()
 
       if (system("sudo nginx -t") != 0)
       {
+        char nginx_error[1024] = {0};
+
+        get_nginx_test_error(nginx_error, sizeof(nginx_error));
+
         unlink(avail_path);
         unlink(enabled_path);
-        printf("Unknown error occurred. Config rollbacked.\n");
+        printf("\033[31mUnknown error occurred.\033[0m Config rollbacked.\n\n");
         system("sudo nginx -t");
-        return 1;
+        offer_troubleshooting(nginx_error);
+        return 0;
       }
 
       char certbot_cmd[STR_LEN * 2];
       snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
       system(certbot_cmd);
+      system("sudo systemctl reload nginx");
 
       printf("Certificate successfully deployed! Exiting now...\n");
     }

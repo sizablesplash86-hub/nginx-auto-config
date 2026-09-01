@@ -1,0 +1,7 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define DISCORD_BOT_TOKEN "YOUR_BOT_TOKEN_HERE"
+#define DISCORD_CHANNEL_ID "YOUR_CHANNEL_ID_HERE"
+
+#endif
