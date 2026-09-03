@@ -6,7 +6,8 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #include <ctype.h> //chapter 7 somewhere
-#include "config.h" //chapter 15.2 p.350
+/*
+#include "config.h" //chapter 15.2 p.350   no longer needed, I'll leave it tho*/
 
 #define CURRENT_VERSION "v1.1.3"
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest"
@@ -105,7 +106,7 @@ void offer_troubleshooting(const char *error_log)
 
   if (ans == 'y')
   {
-    printf("Enter a nickname: ");
+/*  printf("Enter a nickname: ");
     scanf(" %255s", usr);
     
     printf("Sending report to my discord server... If you desire to join, https://discord.gg/HjvadzcdzB\n");
@@ -148,7 +149,7 @@ void offer_troubleshooting(const char *error_log)
     else
     {
       printf("\033[31mERROR\033[0m Message failed to send.\n\n");
-    }
+    } */
   }
   if (ans == 'n')
   {

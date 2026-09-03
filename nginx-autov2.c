@@ -6,7 +6,8 @@
 #include <string.h> //chapter 23 p. 277
 #include <stdlib.h> //chapter 26.2 p. 682
 #include <ctype.h> //chapter 23.5 p. 612
-#include "config.h" //chapter 15.2 p. 350
+/*
+#include "config.h" //chapter 15.2 p. 350   no longer needed, I'll leave it tho */
 
 #define CURRENT_VERSION "v2.0.0" //version
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest" //for updates
@@ -24,7 +25,7 @@ void update_check(); //figure this out once the outline for the code is reconstr
   //
 } */
 
-void clear_buffer() //reread the section on scanf in chapter 3/4, read chapters 12 & 13
+void clear_buffer() //kinda mentioned in chapter 9.2 //reread the section on scanf in chapter 3/4, read chapters 9, 12, & 13
 {
   int c;
   while ((c = getchar()) != '\n' && c != EOF);
@@ -154,11 +155,11 @@ int main() //idk what this is officially called, I just know kinda how to use it
         return 0;
       }
 
-      else{}
+    pclose(cmd);
 
-      pclose(cmd);
+    php_ver[strcspn(php_ver, "\r\n")] = 0;
 
-      fgets(php_ver, sizeof(php_ver), cmd);
+//      fgets(php_ver, sizeof(php_ver), cmd);
       snprintf(php_sock, sizeof(php_sock), "/run/php/php%s-fpm.sock", php_ver);
 
       printf("Enter domain name: ");
@@ -273,7 +274,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
         domain_name
       );
 
-      fclose(cmd);
+      fclose(fp);
 
       char enabled_path[STR_LEN];
       snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/nextcloud");
