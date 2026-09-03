@@ -302,9 +302,6 @@ chmod -R 755 "$HTML_DIR"
 # 3. Write out the NGINX configuration file
 cat << EOF > "$AVAIL_CONF"
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
     listen 3487;
 
     root /var/www/auto-config/;
