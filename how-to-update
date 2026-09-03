@@ -24,7 +24,7 @@ to update:
 
 rm auto-config-pkg/usr/local/bin/auto-config
 rm auto-config_2.0.0_amd64.deb
-gcc -O2 nginx-auto.c -o auto-config-pkg/usr/local/bin/auto-config
+gcc -O2 nginx-autov2.c -o auto-config-pkg/usr/local/bin/auto-config
 dpkg-deb --build auto-config-pkg auto-config_2.0.0_amd64.deb
 nano auto-config-pkg/DEBIAN/control #change version release
 git status

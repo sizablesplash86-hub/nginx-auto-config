@@ -2,9 +2,9 @@
 set -e
 
 TEMP_DEB="$(mktemp /tmp/auto-config-XXXXXX.deb)"
-URL="https://auto-config.sizablesplash.com/older-releases/auto-config_1.1.2_amd64.deb"
+URL="https://repo.sizablesplash.com/auto-config/releases/auto-config_2.0.0_amd64.deb"
 
-echo "Downloading NGINX Auto Program..."
+echo "Downloading NGINX Auto Program... making sure I see this"
 curl -sSL "$URL" -o "$TEMP_DEB"
 
 echo "Installing package..."
