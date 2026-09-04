@@ -1,34 +1,31 @@
 <?php
 header('Content-Type: application/json');
+// api.php
+$input = json_decode(file_get_contents('php://input'), true);
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit;
+$name = preg_replace('/[^a-zA-Z0-9_-]/', '', $input['name']);
+$config = $input['config'];
+
+// If PHP version auto-detection is needed on backend:
+if (strpos($config, 'php8.2-fpm.sock') !== false) {
+    // Find active php-fpm socket dynamically
+    $socks = glob('/run/php/php*-fpm.sock');
+    if (!empty($socks)) {
+        $active_sock = $socks[0];
+        $config = preg_replace('/unix:\/run\/php\/php.*?-fpm\.sock/', 'unix:' . $active_sock, $config);
+    }
 }
 
-$data = json_decode(file_get_contents('php://input'), true);
+// Write file to sites-available and enable
+$file_path = "/etc/nginx/sites-available/" . $name;
+file_put_contents("/tmp/" . $name, $config);
+exec("sudo mv /tmp/$name $file_path");
+exec("sudo ln -sf $file_path /etc/nginx/sites-enabled/");
+exec("sudo nginx -t", $out, $ret);
 
-if (!isset($data['domain']) || !isset($data['config'])) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid input']);
-    exit;
-}
-
-$domain = preg_replace('/[^a-zA-Z0-9\.\-]/', '', $data['domain']);
-$config = $data['config'];
-
-// Temporary write location accessible by www-data
-$tmp_path = "/tmp/" . $domain . ".conf";
-file_put_contents($tmp_path, $config);
-
-// Call a helper script via sudo to deploy and reload
-$command = "sudo /usr/local/bin/deploy-nginx-config " . escapeshellarg($tmp_path) . " " . escapeshellarg($domain);
-exec($command, $output, $return_var);
-
-if ($return_var === 0) {
-    echo json_encode(['success' => true, 'message' => 'Configuration applied successfully!']);
+if ($ret === 0) {
+    exec("sudo systemctl reload nginx");
+    echo json_encode(['message' => "Configuration '$name' applied and NGINX reloaded successfully!"]);
 } else {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to apply configuration', 'details' => $output]);
+    echo json_encode(['error' => "NGINX syntax check failed: " . implode("\n", $out)]);
 }

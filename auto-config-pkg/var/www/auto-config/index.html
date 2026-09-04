@@ -92,7 +92,7 @@
             height: 400px;
         }
 
-        .btn-generate {
+        .btn-apply {
             background-color: var(--accent-color);
             color: white;
             border: none;
@@ -104,7 +104,7 @@
             margin-top: 10px;
         }
 
-        .btn-generate:hover {
+        .btn-apply:hover {
             background-color: var(--accent-hover);
         }
     </style>
@@ -127,6 +127,11 @@
         </div>
 
         <div class="form-group">
+            <label for="conf_name">Config File Name</label>
+            <input type="text" id="conf_name" value="jellyfin" placeholder="e.g. my-app" oninput="generateConfig()">
+        </div>
+
+        <div class="form-group">
             <label for="domain">Domain Name</label>
             <input type="text" id="domain" value="media.example.com" oninput="generateConfig()">
         </div>
@@ -142,8 +147,8 @@
         </div>
 
         <div class="form-group" id="php-group" style="display: none;">
-            <label for="phpver">PHP Socket Version</label>
-            <input type="text" id="phpver" value="8.2" oninput="generateConfig()">
+            <label for="phpver">PHP Socket / Version</label>
+            <input type="text" id="phpver" value="auto" placeholder="auto or e.g. 8.2" oninput="generateConfig()">
         </div>
     </div>
 
@@ -151,7 +156,7 @@
     <div class="card">
         <h2>Generated NGINX Config</h2>
         <pre id="output"></pre>
-        <button class="btn-generate" onclick="applyConfig()">Generate Configuration</button>
+        <button class="btn-apply" onclick="applyConfig()">Apply Configuration</button>
     </div>
 </div>
 
@@ -161,6 +166,7 @@ function toggleFields() {
     const portGroup = document.getElementById('port-group');
     const pathGroup = document.getElementById('path-group');
     const phpGroup = document.getElementById('php-group');
+    const nameInput = document.getElementById('conf_name');
 
     portGroup.style.display = 'none';
     pathGroup.style.display = 'none';
@@ -169,14 +175,18 @@ function toggleFields() {
     if (preset === 'jellyfin') {
         portGroup.style.display = 'block';
         document.getElementById('port').value = '8096';
+        nameInput.value = 'jellyfin';
     } else if (preset === 'nextcloud') {
         phpGroup.style.display = 'block';
         pathGroup.style.display = 'block';
         document.getElementById('path').value = '/var/www/nextcloud';
+        nameInput.value = 'nextcloud';
     } else if (preset === 'custom_proxy') {
         portGroup.style.display = 'block';
+        nameInput.value = 'custom-proxy';
     } else if (preset === 'custom_static') {
         pathGroup.style.display = 'block';
+        nameInput.value = 'custom-static';
     }
 
     generateConfig();
@@ -187,8 +197,13 @@ function generateConfig() {
     const domain = document.getElementById('domain').value || 'example.com';
     const port = document.getElementById('port').value || '8080';
     const path = document.getElementById('path').value || '/var/www/html';
-    const phpver = document.getElementById('phpver').value || '8.2';
+    let phpver = document.getElementById('phpver').value || 'auto';
     
+    // Default fallback display if auto is selected
+    if (phpver === 'auto') {
+        phpver = '8.2'; // PHP-FPM default socket fallback for preview
+    }
+
     let config = '';
 
     if (preset === 'jellyfin') {
@@ -267,14 +282,20 @@ server {
 }
 
 async function applyConfig() {
-    const domain = document.getElementById('domain').value;
-    const configText = document.getElementById('output').textContent;
+    const payload = {
+        preset: document.getElementById('preset').value,
+        name: document.getElementById('conf_name').value,
+        domain: document.getElementById('domain').value,
+        port: document.getElementById('port').value,
+        path: document.getElementById('path').value,
+        phpver: document.getElementById('phpver').value
+    };
 
     try {
         const response = await fetch('api.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ domain: domain, config: configText })
+            body: JSON.stringify(payload)
         });
 
         const result = await response.json();
