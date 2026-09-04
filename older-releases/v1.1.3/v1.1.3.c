@@ -21,7 +21,7 @@ char preset[STR_LEN];
 char preset_choice[STR_LEN];
 char php_ver[STR_LEN];
 
-void get_nginx_test_error(char *buffer, size_t max_len)  //size_t is not a character and is a function mentioned on p.151 chapter 7.6
+void get_nginx_test_error(char *buffer, size_t max_len)
 {
     // Redirect stderr (2) to stdout (1) so popen reads Nginx test errors
     FILE *fp = popen("sudo nginx -t 2>&1", "r");
@@ -42,7 +42,7 @@ void check_for_updates(void) {
     char latest_version[64] = {0};
     
 
-    snprintf(command, sizeof(command),  //sizeof has a section dedicated to it; chapter 7.6 on page 151
+    snprintf(command, sizeof(command),
         "curl -s -H \"User-Agent: auto-config-app\" %s | grep '\"tag_name\":' | sed -E 's/.*\"([^\"]+)\".*/\\1/'",
         REPO_URL
     );

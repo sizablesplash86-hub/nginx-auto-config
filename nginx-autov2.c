@@ -7,7 +7,7 @@
 #include <stdlib.h> //chapter 26.2 p. 682
 #include <ctype.h> //chapter 23.5 p. 612
 /*
-#include "config.h" //chapter 15.2 p. 350   no longer needed, I'll leave it tho */
+#include "config.h" //chapter 15.2 p. 350   no longer needed, I'll leave it tho. It was for a discord bot implimentation in v1 */
 
 #define CURRENT_VERSION "v2.0.0" //version
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest" //for updates
@@ -57,19 +57,45 @@ void parse_json_config(const char *filepath, ConfigArgs *config) {
     free(data);
 } //DO NOT JUST USE THIS, I'M KEEPING IT FOR REFERENCE */
 
-void clear_buffer() //kinda mentioned in chapter 9.2 //reread the section on scanf in chapter 3/4, read chapters 9, 12, & 13
+void clear_buffer() //kinda mentioned in chapter 9.2 //reread the section on scanf in chapter 3/4, read chapters 9, 12, & 13  //void functions are in chapter 9 p.183
 {
   int c;
-  while ((c = getchar()) != '\n' && c != EOF);
+  while ((c = getchar()) != '\n' && c != EOF);  //while statements chapter 6.1 p.99
+}
+
+int root_check()  //if it starts with void (ex: void root_check() it will not work with return 0; or return 1; it has to start with int
+{
+  if (geteuid() != 0)  //if statements are covered in chapter 5.2 while geteuid is a command not in the book as it works with the <unistd.h> header
+  {
+    printf("\n\033[31mEnter root first\033[0m\n\n");  //printf is one of the basic commands of C introduced in the first chapter
+    return 1;  //mentioned many times
+  } 
+  return 0;  //exits code. Mentioned in one of the first pages
+}
+
+void get_nginx_test_error(char *buffer, size_t max_len)  //didn't know you could use this for char stuff  //size_t is not a character and is a function mentioned on p.151 chapter 7.6
+{
+  FILE *fp = popen("sudo nginx -t 2>&1", "r"); //2>&1 is a Linux command that saves the log in an easier to read way  //still don't know the purpose of the "r"
+  fp;
+  
+  size_t bytes_read = fread(buffer, 1, max_len - 1, fp); //bytes_read is not in the book, wrote it down chapter 7.6 p.151  //fread is in the book
+  buffer[bytes_read] = '\0';
+
+  pclose(fp);
+}
+
+void error_log()
+{
+  //
 }
 
 int main() //idk what this is officially called, I just know kinda how to use it
 {
 //update_check();  //work on this after it's all finalized
-  if (geteuid() != 0) //if statements are covered in chapter 5.2 while geteuid is a command not in the book as it works with the <unistd.h> header
+
+  if (root_check() != 0)
   {
-    printf("\n\033[31mEnter root first\033[0m\n\n"); //printf is one of the basic commands of C introduced in the first chapter
-    return 0; //exits code. Mentioned in one of the first pages
+    return 0;
   }
 
   printf("\nWelcome to the NGINX Auto Config %s! Now known as N.A.P. for NGINX Auto Program because it's as easy as taking a NAP.\n\n", CURRENT_VERSION);
@@ -99,7 +125,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
       fgets(domain_name, sizeof(domain_name), stdin); //I give up on citations for now, no one will read these. I know where this is, I'm just lazy
       domain_name[strcspn(domain_name, "\n")] = 0;
       char avail_path[STR_LEN];
-      snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/jellyfin");
+      snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/jellyfin");  //sizeof has a section dedicated to it; chapter 7.6 on page 151
       FILE *fp = fopen(avail_path, "w");
       fprintf(fp,
         "server {\n"
@@ -191,7 +217,6 @@ int main() //idk what this is officially called, I just know kinda how to use it
 
     php_ver[strcspn(php_ver, "\r\n")] = 0;
 
-//      fgets(php_ver, sizeof(php_ver), cmd);
       snprintf(php_sock, sizeof(php_sock), "/run/php/php%s-fpm.sock", php_ver);
 
       printf("Enter domain name: ");
