@@ -25,6 +25,38 @@ void update_check(); //figure this out once the outline for the code is reconstr
   //
 } */
 
+ //DO NOT USE THIS, I'M JUST KEEPING FOR REFERENCE
+typedef struct {
+    char preset[32];
+    char name[64];
+    char domain[128];
+    char port[10];
+    char path[256];
+    char phpver[10];
+} ConfigArgs;
+
+void parse_json_config(const char *filepath, ConfigArgs *config) {
+    FILE *f = fopen(filepath, "r");
+    if (!f) {
+        perror("Failed to open JSON file");
+        exit(1);
+    }
+
+    fseek(f, 0, SEEK_END);
+    long length = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    char *data = malloc(length + 1);
+    fread(data, 1, length, f);
+    fclose(f);
+    data[length] = '\0';
+
+    // Simple parsing logic or use cJSON library here:
+    // cJSON *json = cJSON_Parse(data);
+    
+    free(data);
+} //DO NOT JUST USE THIS, I'M KEEPING IT FOR REFERENCE*/
+
 void clear_buffer() //kinda mentioned in chapter 9.2 //reread the section on scanf in chapter 3/4, read chapters 9, 12, & 13
 {
   int c;
