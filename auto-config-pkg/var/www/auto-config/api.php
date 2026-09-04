@@ -1,31 +1,32 @@
 <?php
 header('Content-Type: application/json');
-// api.php
-$input = json_decode(file_get_contents('php://input'), true);
 
-$name = preg_replace('/[^a-zA-Z0-9_-]/', '', $input['name']);
-$config = $input['config'];
+// Read raw JSON body from fetch request
+$json_data = file_get_contents('php://input');
+$data = json_decode($json_data, true);
 
-// If PHP version auto-detection is needed on backend:
-if (strpos($config, 'php8.2-fpm.sock') !== false) {
-    // Find active php-fpm socket dynamically
-    $socks = glob('/run/php/php*-fpm.sock');
-    if (!empty($socks)) {
-        $active_sock = $socks[0];
-        $config = preg_replace('/unix:\/run\/php\/php.*?-fpm\.sock/', 'unix:' . $active_sock, $config);
-    }
+if (!$data || empty($data['name'])) {
+    echo json_encode(['error' => 'Invalid configuration data provided.']);
+    exit;
 }
 
-// Write file to sites-available and enable
-$file_path = "/etc/nginx/sites-available/" . $name;
-file_put_contents("/tmp/" . $name, $config);
-exec("sudo mv /tmp/$name $file_path");
-exec("sudo ln -sf $file_path /etc/nginx/sites-enabled/");
-exec("sudo nginx -t", $out, $ret);
+// Write the parameters to a temporary JSON file
+$json_file = '/tmp/nginx_config_input.json';
+file_put_contents($json_file, json_encode($data, JSON_PRETTY_PRINT));
 
-if ($ret === 0) {
-    exec("sudo systemctl reload nginx");
-    echo json_encode(['message' => "Configuration '$name' applied and NGINX reloaded successfully!"]);
+// Execute the C binary passing the JSON file path
+$cmd = "sudo /usr/local/bin/nginx-auto --json " . escapeshellarg($json_file) . " 2>&1";
+exec($cmd, $output, $return_var);
+
+if ($return_var === 0) {
+    echo json_encode([
+        'status' => 'success',
+        'message' => 'Configuration generated and applied successfully!'
+    ]);
 } else {
-    echo json_encode(['error' => "NGINX syntax check failed: " . implode("\n", $out)]);
+    echo json_encode([
+        'status' => 'error',
+        'error' => implode("\n", $output)
+    ]);
 }
+?>
