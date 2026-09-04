@@ -25,7 +25,7 @@ void update_check(); //figure this out once the outline for the code is reconstr
   //
 } */
 
- //DO NOT USE THIS, I'M JUST KEEPING FOR REFERENCE
+/* //DO NOT USE THIS, I'M JUST KEEPING FOR REFERENCE
 typedef struct {
     char preset[32];
     char name[64];
@@ -55,7 +55,7 @@ void parse_json_config(const char *filepath, ConfigArgs *config) {
     // cJSON *json = cJSON_Parse(data);
     
     free(data);
-} //DO NOT JUST USE THIS, I'M KEEPING IT FOR REFERENCE*/
+} //DO NOT JUST USE THIS, I'M KEEPING IT FOR REFERENCE */
 
 void clear_buffer() //kinda mentioned in chapter 9.2 //reread the section on scanf in chapter 3/4, read chapters 9, 12, & 13
 {
