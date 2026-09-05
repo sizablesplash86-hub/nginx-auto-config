@@ -75,10 +75,10 @@ int root_check()  //if it starts with void (ex: void root_check() it will not wo
 
 void get_nginx_test_error(char *buffer, size_t max_len)  //didn't know you could use this for char stuff  //size_t is not a character and is a function mentioned on p.151 chapter 7.6
 {
-  FILE *fp = popen("sudo nginx -t 2>&1", "r"); //2>&1 is a Linux command that saves the log in an easier to read way  //still don't know the purpose of the "r"
+  FILE *fp = popen("sudo nginx -t 2>&1", "r"); //2>&1 is a Linux command that saves the log in an easier to read way  //still don't know the purpose of the "r"    wait... I think R is read and W is write
   fp;
   
-  size_t bytes_read = fread(buffer, 1, max_len - 1, fp); //bytes_read is not in the book, wrote it down chapter 7.6 p.151  //fread is in the book
+  size_t bytes_read = fread(buffer, 1, max_len - 1, fp); //bytes_read is not in the book, wrote it down chapter 7.6 p.151  //fread is in the book chapter 22.6 p.571
   buffer[bytes_read] = '\0';
 
   pclose(fp);
@@ -88,6 +88,8 @@ void error_log()
 {
   //
 }
+
+void lan_ip
 
 int main() //idk what this is officially called, I just know kinda how to use it
 {
@@ -113,12 +115,12 @@ int main() //idk what this is officially called, I just know kinda how to use it
   if (preset == 'y')
   {
     char presets;
-    printf("Input 1 for Jellyfin or 2 for Nextcloud LEMP stacks: ");
+    printf("Input 1 for Jellyfin, 2 for Nextcloud LEMP stacks, 3 for Plex, 4 for auto config GUI (NOT RECOMMENDED): ");
     scanf(" %c", &presets);
 
     if (presets == '1')
     {
-      //Jellyfin prest
+      //Jellyfin preset
       clear_buffer();
 
       printf("Enter domain name: ");
@@ -150,7 +152,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
       char enabled_path[STR_LEN];
       snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/jellyfin");
 
-      symlink(avail_path, enabled_path);
+      symlink(avail_path, enabled_path);  //not in book
 
       if (system("sudo nginx -t") != 0)
       {
@@ -186,7 +188,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
           return 0;
         }
       }
-      system(certbot_cmd);
+      //system(certbot_cmd);
       system("sudo nginx -t");
       system("sudo systemctl reload nginx");
       printf("SSL certificate sucessfully deployed! Visit \033[34mhttps://%s\033[0m in your browser.\n\nExiting now...\n\n", domain_name);
@@ -227,7 +229,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
       snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/nextcloud");
       FILE *fp = fopen(avail_path, "w");
       fprintf(fp,
-        "  upstream php-handler {\n"
+        "upstream php-handler {\n"
         "  server unix:%s;\n"
         "}\n\n"
         "map $arg_v $asset_immutable {\n"
@@ -381,8 +383,171 @@ int main() //idk what this is officially called, I just know kinda how to use it
         system("sudo systemctl reload nginx");
       }
     }
+    if (presets == '3') //plex
+    {
+      clear_buffer();
+
+      printf("Enter domain name: ");
+      fgets(domain_name, sizeof(domain_name), stdin);
+      domain_name[strcspn(domain_name, "\n")] = 0;
+      char avail_path[STR_LEN];
+      snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/plex");
+      FILE *fp = fopen(avail_path, "w");
+
+      fprintf(fp,
+        "server {\n"
+        "  listen 80;\n"
+        "  server_name %s;\n\n"
+        "  location / {\n"
+        "    proxy_pass http://127.0.0.1:3400;\n"
+        "    proxy_http_version 1.1;\n"
+        "    proxy_set_header Upgrade $http_upgrade;\n"
+        "    proxy_set_header Connection 'upgrade';\n"
+        "    proxy_set_header Host $host;\n"
+        "    proxy_cache_bypass $http_upgrade;\n"
+        "    proxy_set_header X-Real-IP $remote_addr;\n"
+        "  }\n\n"
+        "  error_page 502 /502.html;\n"
+        "  location = /502.html {\n"
+        "    root /home/PlexStore;\n"
+        "  }\n"
+        "}\n",
+        domain_name
+      );
+      fclose(fp);
+
+      char enabled_path[STR_LEN];
+      snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/plex");
+      symlink(avail_path, enabled_path);
+
+      if (system("sudo nginx -t") != 0)
+      {
+        printf("\033[31mUNKNOWN ERROR OCCURRED\033[0m\n");
+        //printf("Would you like to save a log? (y or n): ");
+        printf("Removing broken configuration...\n");
+        unlink(avail_path);
+        unlink(enabled_path);
+        system("sudo nginx -t");
+        return 0;
+      }
+
+      char certbot_cmd[STR_LEN * 2];
+      snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
+
+      if (system(certbot_cmd) != 0)
+      {
+        char rem;
+        printf("\033[31mERROR\033[0m SSL certificate failed to deploy\n\n");
+        printf("Would you like to remove config in /etc/nginx/sites-available /etc/nginx/sites-enabled? (y or n): ");
+        scanf(" %c", &rem);
+        if (rem == 'y')
+        {
+          printf("Removing broken configuration...\n");
+          unlink(avail_path);
+          unlink(enabled_path);
+          system("sudo nginx -t");
+          return 0;
+        }
+        if (rem == 'n' || rem == 'q')
+        {
+          printf("Exiting now...\n\n");
+          return 0;
+        }
+      }
+      
+      system("sudo nginx -t");
+      system("sudo systemctl reload nginx");
+      printf("SSL certificate successfully deployed! Visit \033[0mhttps://%s\033[0m in you browser.\n\n");
+
+    } //plex ends here
+
+    if (presets == '4') //auto config GUI
+    {
+      char gui;
+      printf("\033[31mWARNING!!\033[0m Opening the auto config GUI to the public internet is risky. Do you wish to proceed? (y or n): ");
+      scanf(" %c", &gui);
+
+      if (gui == 'n') return 0;
+
+      clear_buffer();
+
+      printf("Enter domain name: ");
+      fgets(domain_name, sizeof(domain_name), stdin);
+//    domain_name[strcspn(domain_name, "\n")] = 0;
+      
+      system("rm /etc/nginx/sites-available/auto-config && rm /etc/nginx/sites-enabled/auto-config");
+      char avail_path[STR_LEN];
+      snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/auto-config");
+      FILE *fp = fopen(avail_path, "w");
+
+      fprintf(fp,
+        "server {\n"
+        "  listen 80;\n"
+        "  listen [::]:80;\n\n"
+
+        "  server_name %s;\n\n"
+
+        "  root /var/www/auto-config/;\n"
+        "  index index.html index.php;\n\n"
+
+        "  location / {\n"
+        "    autoindex on;\n"
+        "    try_files $uri $uri/ $uri/index.html $uri.html $uri.php =404;\n"
+        "  }\n"
+        "}\n",
+        domain_name
+      );
+
+      fclose(fp);
+
+      char enabled_path[STR_LEN];
+      snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/auto-config");
+      symlink(avail_path, enabled_path);
+
+      if (system("sudo nginx -t") != 0)
+      {
+        printf("\033[31mUNKNOWN ERROR OCCURRED\033[0m\n");
+        //printf("Would you like to save a log? (y or n): ");
+        printf("Removing broken configuration...\n");
+        unlink(avail_path);
+        unlink(enabled_path);
+        system("sudo nginx -t");
+        return 0;
+      }
+
+      char certbot_cmd[STR_LEN * 2];
+      snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
+
+      if (system(certbot_cmd) !=0)
+      {
+        char rem;
+        printf("\033[31mERROR\033[0m SSL certificate failed to deploy\n\n");
+        printf("Would you like to remove config in /etc/nginx/sites-available /etc/nginx/sites-enabled? (y or n): ");
+        scanf(" %c", &rem);
+        if (rem == 'y')
+        {
+          printf("Removing broken configuration...\n");
+          unlink(avail_path);
+          unlink(enabled_path);
+          system("sudo nginx -t");
+          return 0;
+        }
+        if (rem == 'n' || rem == 'q')
+        {
+          printf("Exiting now...\n\n");
+          return 0;
+        }
+      }
+      else
+      {
+        printf("SSL certificate sucessfully deployed! Visit \033[34mhttps://%s\033[0m in your browser.\n\nExiting now...\n\n", domain_name);
+        system("sudo nginx -t");
+        system("sudo systemctl reload nginx");
+      }
+    } //GUI ends here
     return 0;
-  }
+  } //presets end here
+
   else{}
 
   if (preset == 'q') return 0;
@@ -444,18 +609,41 @@ int main() //idk what this is officially called, I just know kinda how to use it
 
   if (type == '2')
   {
-    fprintf(fp,
-      "server {\n"
-      "  server_name %s;\n\n"
-      "  root %s;\n"
-      "  index index.html index.htm;\n\n"
-      "  location / {\n"
-      "    autoindex on;\n"
-      "    try_files $uri $uri/ $uri/index.html $uri.html =404;\n"
-      "  }\n"
-      "}\n",
-      domain_name, directory
-    );
+    if (system("php -v 1>/dev/null") == 0)
+    {
+      fprintf(fp,
+        "server {\n"
+        "  listen 80;\n"
+        "  listen [::]:80;\n\n"
+        "  server_name %s;\n\n"
+        "  root %s;\n"
+        "  index index.html index.htm index.php;\n\n"
+        "  location / {\n"
+        "    autoindex on;\n"
+        "    try_files $uri $uri/ $uri/index.html $uri.html $uri.php =404;\n"
+        "  }\n"
+        "}\n",
+        domain_name, directory
+      );
+    }
+
+    else
+    {
+      fprintf(fp,
+        "server {\n"
+        "  listen 80;\n"
+        "  listen [::]:80;\n\n"
+        "  server_name %s;\n\n"
+        "  root %s;\n"
+        "  index index.html index.htm;\n\n"
+        "  location / {\n"
+        "    autoindex on;\n"
+        "    try_files $uri $uri/ $uri/index.html $uri.html =404;\n"
+        "  }\n"
+        "}\n",
+        domain_name, directory
+      );
+    }
   }
 
   fclose(fp);

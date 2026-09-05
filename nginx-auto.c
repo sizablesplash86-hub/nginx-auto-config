@@ -6,6 +6,7 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #include <ctype.h> //chapter 7 somewhere
+
 /*
 #include "config.h" //chapter 15.2 p.350   no longer needed, I'll leave it tho*/
 
@@ -329,7 +330,7 @@ int main()
               if (atoi(preset_choice) == 2)
               {
                 fprintf(fp,
-                  "  upstream php-handler {\n"
+                  "upstream php-handler {\n"
                   "  server unix:%s;\n"
                   "}\n\n"
                   "map $arg_v $asset_immutable {\n"
