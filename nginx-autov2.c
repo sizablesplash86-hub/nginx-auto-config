@@ -86,10 +86,13 @@ void get_nginx_test_error(char *buffer, size_t max_len)  //didn't know you could
 
 void error_log()
 {
-  //
+  // I'm lazy
 }
 
 void lan_ip
+{
+  
+}
 
 int main() //idk what this is officially called, I just know kinda how to use it
 {
