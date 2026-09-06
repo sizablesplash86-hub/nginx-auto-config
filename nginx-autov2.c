@@ -13,7 +13,7 @@
 #include <arpa/inet.h> //another UNIX internet API
 
 /*
-#include "config.h" //chapter 15.2 p. 350   no longer needed, I'll leave it tho. It was for a discord bot implimentation in v1 */
+#include "config.h" //chapter 15.2 p. 350   no longer needed, I'll leave it tho for reference. It was for a discord bot implimentation in v1 */
 
 #define CURRENT_VERSION "v2.0.0" //version
 #define REPO_URL "https://api.github.com/repos/sizablesplash86-hub/nginx-auto-config/releases/latest" //for updates
@@ -70,7 +70,7 @@ void update_check() //figure this out once the outline for the code is reconstru
       int res = system(update_cmd);
       if (res == 0)
       {
-        printf("\nUpgrade to %s completed successfully!\n\n");
+        printf("\nUpgrade to %s completed successfully!\n\n", latest_version);
         system("auto-config");
         exit(0);
       }
@@ -559,7 +559,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
 
       printf("Enter domain name: ");
       fgets(domain_name, sizeof(domain_name), stdin);
-//    domain_name[strcspn(domain_name, "\n")] = 0;
+      domain_name[strcspn(domain_name, "\n")] = 0;
       
       system("rm /etc/nginx/sites-available/auto-config && rm /etc/nginx/sites-enabled/auto-config");
       char avail_path[STR_LEN];

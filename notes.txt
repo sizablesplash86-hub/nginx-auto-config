@@ -22,13 +22,21 @@ sudo apt install ./auto-config_1.0.0_amd64.deb
 
 to update:
 
-rm auto-config-pkg/usr/local/bin/auto-config
-rm auto-config_2.0.0_amd64.deb
+#removes binary
+rm -f auto-config-pkg/usr/local/bin/auto-config
+#change the version release in the line
+nano auto-config-pkg/DEBIAN/control
+#compiles to the build creator thing
 gcc -O2 nginx-autov2.c -o auto-config-pkg/usr/local/bin/auto-config
-dpkg-deb --build auto-config-pkg auto-config_2.0.0_amd64.deb
-nano auto-config-pkg/DEBIAN/control #change version release
+#change for respective version
+mkdir -p older-releases/v2.0.0
+#output to releases      change per version
+dpkg-deb --build auto-config-pkg older-releases/v2.0.1/auto-config_2.0.0_amd64.deb
+
 git status
-git add auto-config-pkg/DEBIAN/control auto-config_2.0.0_amd64.deb
+
 git add .
-git commit -m "INSERT CHANGE HERE"
+#change with what added
+git commit -m "Version 2.0 in isolated beta"
+
 git push origin main
