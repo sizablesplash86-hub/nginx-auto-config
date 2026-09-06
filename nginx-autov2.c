@@ -186,7 +186,7 @@ int main() //idk what this is officially called, I just know kinda how to use it
 
   printf("\nWelcome to the NGINX Auto Config %s! Now known as N.A.P. for NGINX Auto Program because it's as easy as taking a NAP.\n\n", CURRENT_VERSION);
   
-  // version 2.0 was created 2026-08-31 15:47:52 & released
+  // version 2.0 was created 2026-08-31 15:47:52 & released September 6th, 2026 1:30 a.m
 
   printf("Visit \033[34mhttp://%s:3487\033[0m in the browser to use the graphical interface\n\n", lan_ip); //work on this later
   
