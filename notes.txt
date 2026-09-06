@@ -31,7 +31,7 @@ gcc -O2 nginx-autov2.c -o auto-config-pkg/usr/local/bin/auto-config
 #change for respective version
 mkdir -p older-releases/v2.0.0
 #output to releases      change per version
-dpkg-deb --build auto-config-pkg older-releases/v2.0.1/auto-config_2.0.0_amd64.deb
+dpkg-deb --build auto-config-pkg older-releases/v2.0.0/auto-config_2.0.0_amd64.deb
 
 git status
 
