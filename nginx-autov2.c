@@ -147,31 +147,6 @@ void error_log()
   // I'm lazy, probably won't add this
 }
 
-/*
-void ip_add(char *buffer, size_t max_len)  //pretty much everything in this section isn't in the book
-{
-  struct ifaddrs *ifaddr, *ifa; //something... somewhere...
-  char lan_ip[INET_ADDRSTRLEN]; //INET_ADDRSTRLEN is for the buffer for the IP size
-
-  getifaddrs(&ifaddr);
-
-  for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
-  {
-    if (
-      strcmp(ifa->ifa_name, "lo") == 0 ||
-      strncmp(ifa->ifa_name, "wg", 2) == 0 ||
-      strncmp(ifa->ifa_name, "tailscale", 9) == 0 ||
-      strncmp(ifa->ifa_name, "docker", 6) == 0
-    )
-    {
-      continue;
-    }
-    struct sockaddr_in *pAddr = (struct sockaddr_in *)ifa->ifa_addr;
-
-    inet_ntop(AF_INET, &pAddr->sin_addr, ip, sizeof(ip));
-  }
-} */
-
 int main() //idk what this is officially called, I just know kinda how to use it
 {
   if (root_check() != 0)
@@ -179,13 +154,41 @@ int main() //idk what this is officially called, I just know kinda how to use it
     return 0;
   }
 
-//update_check();  //work on this after it's all finalized
+  update_check();  //work on this after it's all finalized
 
-//ip_add();  //add later
+//learn this later
+  struct ifaddrs *ifaddr, *ifa; //something... somewhere...
+  char lan_ip[INET_ADDRSTRLEN]; //INET_ADDRSTRLEN is for the buffer for the IP size
+
+  if (getifaddrs(&ifaddr) == 0) {
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
+    {
+      // Skip NULL addresses or non-IPv4 interfaces
+      if (ifa->ifa_addr == NULL || ifa->ifa_addr->sa_family != AF_INET) 
+      {
+        continue;
+      }
+
+      // Filter out loopback, WireGuard, Tailscale, Docker, and VM bridge interfaces
+      if (strcmp(ifa->ifa_name, "lo") == 0 || strncmp(ifa->ifa_name, "wg", 2) == 0 || strncmp(ifa->ifa_name, "tailscale", 9) == 0 || strncmp(ifa->ifa_name, "docker", 6) == 0 || strncmp(ifa->ifa_name, "veth", 4) == 0)
+      {
+        continue;
+      }
+
+      struct sockaddr_in *pAddr = (struct sockaddr_in *)ifa->ifa_addr;
+      inet_ntop(AF_INET, &pAddr->sin_addr, lan_ip, sizeof(lan_ip));
+      
+      // Break after finding the first valid primary LAN interface
+      break; 
+    }
+    freeifaddrs(ifaddr);
+  }
 
   printf("\nWelcome to the NGINX Auto Config %s! Now known as N.A.P. for NGINX Auto Program because it's as easy as taking a NAP.\n\n", CURRENT_VERSION);
   
-//printf("Visit http://%s3487 in the browser to use the graphical interface", ip); //work on this later
+  // version 2.0 was created 2026-08-31 15:47:52 & released
+
+  printf("Visit \033[34mhttp://%s:3487\033[0m in the browser to use the graphical interface\n\n", lan_ip); //work on this later
   
   printf("This program is designed to work with my server guide \033[34mhttps://www.sizablesplash.com/server-guide\033[0m\n\n");
 
