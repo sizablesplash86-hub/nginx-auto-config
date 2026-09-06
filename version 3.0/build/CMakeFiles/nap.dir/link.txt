@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/nap.dir/link.d CMakeFiles/nap.dir/start.c.o CMakeFiles/nap.dir/presets.c.o -o nap

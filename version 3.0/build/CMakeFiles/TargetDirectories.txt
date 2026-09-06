@@ -1,0 +1,3 @@
+/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles/nap.dir
+/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles/edit_cache.dir
+/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles/rebuild_cache.dir
