@@ -129,6 +129,30 @@ nap/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/build
 .PHONY : nap/fast
 
+manual.o: manual.c.o
+.PHONY : manual.o
+
+# target to build an object file
+manual.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.o
+.PHONY : manual.c.o
+
+manual.i: manual.c.i
+.PHONY : manual.i
+
+# target to preprocess a source file
+manual.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.i
+.PHONY : manual.c.i
+
+manual.s: manual.c.s
+.PHONY : manual.s
+
+# target to generate assembly for a file
+manual.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.s
+.PHONY : manual.c.s
+
 presets.o: presets.c.o
 .PHONY : presets.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... nap"
+	@echo "... manual.o"
+	@echo "... manual.i"
+	@echo "... manual.s"
 	@echo "... presets.o"
 	@echo "... presets.i"
 	@echo "... presets.s"

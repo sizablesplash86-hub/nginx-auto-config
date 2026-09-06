@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/nap.dir/link.d"
+  "CMakeFiles/nap.dir/manual.c.o"
+  "CMakeFiles/nap.dir/manual.c.o.d"
   "CMakeFiles/nap.dir/presets.c.o"
   "CMakeFiles/nap.dir/presets.c.o.d"
   "CMakeFiles/nap.dir/start.c.o"

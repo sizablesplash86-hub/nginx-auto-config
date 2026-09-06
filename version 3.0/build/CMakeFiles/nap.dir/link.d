@@ -4,6 +4,7 @@ nap: \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
   CMakeFiles/nap.dir/start.c.o \
   CMakeFiles/nap.dir/presets.c.o \
+  CMakeFiles/nap.dir/manual.c.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
@@ -35,6 +36,8 @@ nap: \
 CMakeFiles/nap.dir/start.c.o:
 
 CMakeFiles/nap.dir/presets.c.o:
+
+CMakeFiles/nap.dir/manual.c.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a:
 

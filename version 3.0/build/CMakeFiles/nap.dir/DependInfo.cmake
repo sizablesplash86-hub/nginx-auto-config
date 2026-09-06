@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/mnt/code-projects/packages/auto-config/version 3.0/manual.c" "CMakeFiles/nap.dir/manual.c.o" "gcc" "CMakeFiles/nap.dir/manual.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/presets.c" "CMakeFiles/nap.dir/presets.c.o" "gcc" "CMakeFiles/nap.dir/presets.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/start.c" "CMakeFiles/nap.dir/start.c.o" "gcc" "CMakeFiles/nap.dir/start.c.o.d"
   "" "nap" "gcc" "CMakeFiles/nap.dir/link.d"

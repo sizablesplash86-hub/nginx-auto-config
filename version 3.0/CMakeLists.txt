@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Option A: Option 1 approach (Single executable compiled from multiple sources)
-add_executable(nap start.c presets.c)
+add_executable(nap start.c presets.c manual.c jellyfin.c plex.c nextcloud.c gui.c)
 
 # Option B: Option 2 approach (If you want two separate executables)
 # add_executable(start start.c)

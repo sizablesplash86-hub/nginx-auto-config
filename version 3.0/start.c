@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "config.h"
 
 void update_check()
@@ -10,14 +11,21 @@ void update_check()
 
 int root_check()
 {
-  printf("\nroot check not setup yet\n\n");
+  if (geteuid() != 0)
+  {
+    printf("not in root\n\n");
+    return 1;
+  }
+  //printf("\nroot check not setup yet\n\n");
+  printf("in root\n\n");
+  return 0;
 }
 
 int main()
 {
   char one;
+  if (root_check() != 0) return 0;
   update_check();
-  root_check();
 
   printf("\nwelcome to N.A.P. %s!\n\n", CURRENT_VERSION);
   
