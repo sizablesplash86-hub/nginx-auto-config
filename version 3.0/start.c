@@ -4,13 +4,13 @@
 
 void update_check()
 {
-  printf("\nNot setup yet\n\n");
+  printf("\nupdates not setup yet\n\n");
   return;
 }
 
 int root_check()
 {
-  printf("\nNot setup yet\n\n");
+  printf("\nroot check not setup yet\n\n");
 }
 
 int main()
@@ -23,6 +23,15 @@ int main()
   
   printf("Would you like to pick between presets? y/n: ");
   scanf(" %c", &one);
+  if (one == 'y')
+  {
+    run_presets();
+  }
+
+  if (one == 'n')
+  {
+    run_manual();
+  }
 
   return 0;
 }

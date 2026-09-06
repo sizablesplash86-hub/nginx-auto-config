@@ -4,6 +4,6 @@
 
 void run_presets(void)
 {
-  printf("not setup yet");
+  printf("presets not setup yet\n");
   return;
 }
