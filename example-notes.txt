@@ -1,0 +1,103 @@
+this is for a LAN IP checker
+
+==========================================================================
+
+//sources from K. N. King's C Programming a Modern Approach Second Edition
+//Network Interface Utility!
+#include <stdio.h>      //standard functions
+#include <stdlib.h>     //chapter 26.2 p. 682
+#include <string.h>     //chapter 23 p. 277
+#include <ifaddrs.h>    //not in the book, POSIX network interface lookup extension
+#include <netinet/in.h> //not in the book, defines sockaddr_in and AF_INET structures
+#include <arpa/inet.h>  //not in the book, provides inet_ntop for string conversions
+
+/*
+//DO NOT USE THIS, JUST KEEPING FOR REFERENCE IF SWITCHING TO IOCTL
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <net/if.h>
+*/
+
+void get_lan_ip(void) //void functions are in chapter 9 p. 183
+{
+    struct ifaddrs *ifaddr, *ifa; //pointers to structures, dynamic data structures in chapter 17 p. 416
+    char ip[INET_ADDRSTRLEN];     //char arrays for strings in chapter 13 p. 280
+
+    //getifaddrs allocates memory and builds linked list of network adapters (not in King book)
+    if (getifaddrs(&ifaddr) == -1) //if statements covered in chapter 5.2 p. 74
+    {
+        perror("getifaddrs failed"); //error handling function in chapter 26.2 p. 696
+        return;                      //return without value in void function chapter 9.2 p. 187
+    }
+
+    //for loops and pointers moving through a linked list, chapter 6.3 p. 110 & chapter 17.5 p. 428
+    for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next) 
+    {
+        //skip empty pointers or addresses that aren't standard IPv4 (AF_INET)
+        if (ifa->ifa_addr == NULL || ifa->ifa_addr->sa_family != AF_INET) 
+        {
+            continue; //continue statement chapter 6.4 p. 116
+        }
+
+        //filter out loopback, WireGuard, Tailscale, and Docker interfaces (strcmp & strncmp chapter 13.5 p. 300)
+        if (strcmp(ifa->ifa_name, "lo") == 0 ||
+            strncmp(ifa->ifa_name, "wg", 2) == 0 ||
+            strncmp(ifa->ifa_name, "tailscale", 9) == 0 ||
+            strncmp(ifa->ifa_name, "docker", 6) == 0) 
+        {
+            continue;
+        }
+
+        //struct casting (chapter 16 p. 377) from generic sockaddr to socket structure sockaddr_in
+        struct sockaddr_in *pAddr = (struct sockaddr_in *)ifa->ifa_addr;
+        
+        //inet_ntop is a Linux conversion function, converts network binary IP to readable string
+        inet_ntop(AF_INET, &pAddr->sin_addr, ip, sizeof(ip)); //sizeof operator chapter 7.6 p. 151
+
+        printf("Primary LAN Interface (%s): %s\n", ifa->ifa_name, ip); //printf formatting chapter 3.1 p. 37
+    }
+
+    freeifaddrs(ifaddr); //frees dynamically allocated memory list, concept from free() chapter 17.4 p. 423
+}
+
+int main(void) //chapter 2.1 p. 9
+{
+    get_lan_ip();
+    return 0; //chapter 2.1 p. 10
+}
+
+
+this is for working with the GUI
+======================================
+
+
+typedef struct {
+    char preset[32];
+    char name[64];
+    char domain[128];
+    char port[10];
+    char path[256];
+    char phpver[10];
+} ConfigArgs;
+
+void parse_json_config(const char *filepath, ConfigArgs *config) {
+    FILE *f = fopen(filepath, "r");
+    if (!f) {
+        perror("Failed to open JSON file");
+        exit(1);
+    }
+
+    fseek(f, 0, SEEK_END);
+    long length = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    char *data = malloc(length + 1);
+    fread(data, 1, length, f);
+    fclose(f);
+    data[length] = '\0';
+
+    // Simple parsing logic or use cJSON library here:
+    // cJSON *json = cJSON_Parse(data);
+    
+    free(data);
+}

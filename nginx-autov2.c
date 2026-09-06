@@ -1,11 +1,17 @@
 //sources from K. N. King's C Programming a Modern Aproach Second Edition
 //NGINX Auto Program! It's as easy as taking a N.A.P.
 #include <stdio.h> //standard functions
-#include <unistd.h> //not in the book, wrote down in the back pages
 #include <float.h> //not even sure if I still need this, chapter 23 p. 589
 #include <string.h> //chapter 23 p. 277
 #include <stdlib.h> //chapter 26.2 p. 682
 #include <ctype.h> //chapter 23.5 p. 612
+//not in book, wrote down in the back pages
+#include <unistd.h> //gives access to the POSIX OS API
+#include <ifaddrs.h> //Linux IP info header
+#include <netinet/in.h> //defines internet protocol; in the directory netinet in /usr/include
+#include <sys/socket.h> //Network API for UNIX based systems
+#include <arpa/inet.h> //another UNIX internet API
+
 /*
 #include "config.h" //chapter 15.2 p. 350   no longer needed, I'll leave it tho. It was for a discord bot implimentation in v1 */
 
@@ -20,7 +26,7 @@ char domain_name[STR_LEN];
 char php_ver[STR_LEN];
 
 
-void update_check(); //figure this out once the outline for the code is reconstructed
+void update_check() //figure this out once the outline for the code is reconstructed
 {
   char command[512];
   char latest_version[64];
@@ -138,26 +144,48 @@ void get_nginx_test_error(char *buffer, size_t max_len)  //didn't know you could
 
 void error_log()
 {
-  // I'm lazy
+  // I'm lazy, probably won't add this
 }
 
-void lan_ip
+/*
+void ip_add(char *buffer, size_t max_len)  //pretty much everything in this section isn't in the book
 {
-  
-}
+  struct ifaddrs *ifaddr, *ifa; //something... somewhere...
+  char lan_ip[INET_ADDRSTRLEN]; //INET_ADDRSTRLEN is for the buffer for the IP size
+
+  getifaddrs(&ifaddr);
+
+  for (ifa = ifaddr; ifa != NULL; ifa = ifa->ifa_next)
+  {
+    if (
+      strcmp(ifa->ifa_name, "lo") == 0 ||
+      strncmp(ifa->ifa_name, "wg", 2) == 0 ||
+      strncmp(ifa->ifa_name, "tailscale", 9) == 0 ||
+      strncmp(ifa->ifa_name, "docker", 6) == 0
+    )
+    {
+      continue;
+    }
+    struct sockaddr_in *pAddr = (struct sockaddr_in *)ifa->ifa_addr;
+
+    inet_ntop(AF_INET, &pAddr->sin_addr, ip, sizeof(ip));
+  }
+} */
 
 int main() //idk what this is officially called, I just know kinda how to use it
 {
-//update_check();  //work on this after it's all finalized
-
   if (root_check() != 0)
   {
     return 0;
   }
 
+//update_check();  //work on this after it's all finalized
+
+//ip_add();  //add later
+
   printf("\nWelcome to the NGINX Auto Config %s! Now known as N.A.P. for NGINX Auto Program because it's as easy as taking a NAP.\n\n", CURRENT_VERSION);
   
-  //printf("Visit 3487 in the browser to use the graphical interface"); //work on this later
+//printf("Visit http://%s3487 in the browser to use the graphical interface", ip); //work on this later
   
   printf("This program is designed to work with my server guide \033[34mhttps://www.sizablesplash.com/server-guide\033[0m\n\n");
 

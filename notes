@@ -1,4 +1,34 @@
-in order for the graphical to work, run nano /etc/sudoers.d/nginx-auto and paste www-data ALL=(ALL) NOPASSWD: /usr/bin/nginx -t, /usr/bin/systemctl reload nginx, /usr/bin/cp /tmp/*.conf /etc/nginx/sites-available/
+mkdir -p auto-config-pkg/DEBIAN
+mkdir -p auto-config-pkg/usr/local/bin
 
-the graphical install HTMl code is stored in /mnt/code-projects/packages/auto-config/auto-config-pkg/var/www/auto-config/
-the program for installing and creating it is located in /mnt/code-projects/packages/auto-config/auto-config-pkg/DEBIAN/postinst
+gcc -O2 nginx-auto.c -o auto-config-pkg/usr/local/bin/auto-config
+chmod +x auto-config-pkg/usr/local/bin/auto-config
+
+nano auto-config-pkg/DEBIAN/control
+
+  Package: auto-config
+  Version: 1.0.0
+  Section: utils
+  Priority: optional
+  Architecture: amd64
+  Depends: nginx, certbot, python3-certbot-nginx
+  Maintainer: sizablesplash86
+  Description: Automated Nginx configuration and SSL setup generator.
+
+dpkg-deb --build auto-config-pkg auto-config_1.0.0_amd64.deb
+
+sudo apt install ./auto-config_1.0.0_amd64.deb
+
+
+to update:
+
+rm auto-config-pkg/usr/local/bin/auto-config
+rm auto-config_2.0.0_amd64.deb
+gcc -O2 nginx-autov2.c -o auto-config-pkg/usr/local/bin/auto-config
+dpkg-deb --build auto-config-pkg auto-config_2.0.0_amd64.deb
+nano auto-config-pkg/DEBIAN/control #change version release
+git status
+git add auto-config-pkg/DEBIAN/control auto-config_2.0.0_amd64.deb
+git add .
+git commit -m "INSERT CHANGE HERE"
+git push origin main
