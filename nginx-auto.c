@@ -606,3 +606,15 @@ int main()
   }
   return 0;
 }
+
+bool ask_y_n(void)
+{
+  char input[128];
+  if (fgets(input, sizeof input, stdin) != NULL)
+  {
+    char ans = input[0];
+    
+    if (ans == 'y' || ans == 'Y')
+	    return true;
+  }
+}
