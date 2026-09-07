@@ -615,6 +615,12 @@ bool ask_y_n(void)
     char ans = input[0];
     
     if (ans == 'y' || ans == 'Y')
-	    return true;
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 }
