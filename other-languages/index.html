@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.A.P. - NGINX Auto Program v2.0.0</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: #313244;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #89b4fa;
+            margin-top: 0;
+        }
+        .guide-link {
+            color: #89dcfe;
+            text-decoration: none;
+        }
+        .guide-link:hover {
+            text-decoration: underline;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border-radius: 5px;
+            border: 1px solid #45475a;
+            background-color: #1e1e2e;
+            color: #cdd6f4;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #89b4fa;
+            color: #11111b;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            border: none;
+        }
+        button:hover {
+            background-color: #b4befe;
+        }
+        .hidden {
+            display: none;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #181825;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .error { color: #f38ba8; }
+        .success { color: #a6e3a1; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>NGINX Auto Program (N.A.P.)</h1>
+    <p>Version 2.0.0 — Designed for the <a class="guide-link" href="https://www.sizablesplash.com/server-guide" target="_blank" rel="noopener noreferrer">Server Guide</a></p>
+
+    <form id="configForm">
+        <label for="mode">Configuration Method</label>
+        <select id="mode" name="mode">
+            <option value="preset">Use Preset</option>
+            <option value="custom">Custom Configuration</option>
+        </select>
+
+        <!-- Presets Group -->
+        <div id="presetGroup">
+            <label for="preset">Select Service Preset</label>
+            <select id="preset" name="preset">
+                <option value="1">Jellyfin Reverse Proxy</option>
+                <option value="2">Nextcloud LEMP Stack</option>
+                <option value="3">Plex Media Server</option>
+                <option value="4">Auto Config GUI</option>
+            </select>
+        </div>
+
+        <!-- Custom Options Group -->
+        <div id="customGroup" class="hidden">
+            <label for="configName">Config File Name</label>
+            <input type="text" id="configName" placeholder="e.g., mysite">
+
+            <label for="type">Type</label>
+            <select id="type" name="type">
+                <option value="1">Reverse Proxy</option>
+                <option value="2">Standalone Directory</option>
+            </select>
+
+            <div id="proxyField">
+                <label for="proxy">Proxy Port</label>
+                <input type="text" id="proxy" placeholder="e.g., 8080">
+            </div>
+
+            <div id="directoryField" class="hidden">
+                <label for="directory">Root Directory Path</label>
+                <input type="text" id="directory" placeholder="e.g., /var/www/html">
+            </div>
+        </div>
+
+        <!-- Common Domain Field -->
+        <label for="domain">Domain Name</label>
+        <input type="text" id="domain" name="domain" placeholder="e.g., example.com" required>
+
+        <button type="submit">Deploy Configuration</button>
+    </form>
+
+    <div id="output" class="hidden"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
