@@ -22,7 +22,7 @@ void certbot(void)
   {
     char rem;
     printf("\033[31mERROR\033[0m SSL certificate failed to deploy\n\n");
-    printf("Would you like to remove broken config? (y/n): ");
+    printf("Would you like to remove broken config? y/n: ");
     scanf(" %c", &rem);
 
     if (rem == 'y')

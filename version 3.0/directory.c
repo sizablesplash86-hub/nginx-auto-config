@@ -19,7 +19,7 @@ void run_directory(void)
   snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/%s", config_name);
   FILE *fp = fopen(avail_path, "w");
 
-  if (system("php -v 1>/dev/null") == 0)
+  if (system("php -v > /dev/null 2>&1") == 0)
   {
     fprintf(fp,
       "server {\n"

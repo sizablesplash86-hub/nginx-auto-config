@@ -2,17 +2,21 @@ nap: \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
+  CMakeFiles/nap.dir/nginx_json.c.o \
   CMakeFiles/nap.dir/start.c.o \
+  CMakeFiles/nap.dir/update.c.o \
+  CMakeFiles/nap.dir/lan-ip.c.o \
+  CMakeFiles/nap.dir/domain.c.o \
   CMakeFiles/nap.dir/presets.c.o \
-  CMakeFiles/nap.dir/manual.c.o \
+  CMakeFiles/nap.dir/gui-install.c.o \
   CMakeFiles/nap.dir/jellyfin.c.o \
   CMakeFiles/nap.dir/plex.c.o \
   CMakeFiles/nap.dir/nextcloud.c.o \
   CMakeFiles/nap.dir/gui.c.o \
+  CMakeFiles/nap.dir/manual.c.o \
   CMakeFiles/nap.dir/proxy.c.o \
   CMakeFiles/nap.dir/directory.c.o \
   CMakeFiles/nap.dir/certbot.c.o \
-  CMakeFiles/nap.dir/domain.c.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
@@ -41,11 +45,19 @@ nap: \
 
 /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o:
 
+CMakeFiles/nap.dir/nginx_json.c.o:
+
 CMakeFiles/nap.dir/start.c.o:
+
+CMakeFiles/nap.dir/update.c.o:
+
+CMakeFiles/nap.dir/lan-ip.c.o:
+
+CMakeFiles/nap.dir/domain.c.o:
 
 CMakeFiles/nap.dir/presets.c.o:
 
-CMakeFiles/nap.dir/manual.c.o:
+CMakeFiles/nap.dir/gui-install.c.o:
 
 CMakeFiles/nap.dir/jellyfin.c.o:
 
@@ -55,13 +67,13 @@ CMakeFiles/nap.dir/nextcloud.c.o:
 
 CMakeFiles/nap.dir/gui.c.o:
 
+CMakeFiles/nap.dir/manual.c.o:
+
 CMakeFiles/nap.dir/proxy.c.o:
 
 CMakeFiles/nap.dir/directory.c.o:
 
 CMakeFiles/nap.dir/certbot.c.o:
-
-CMakeFiles/nap.dir/domain.c.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a:
 

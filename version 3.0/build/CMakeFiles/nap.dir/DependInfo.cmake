@@ -11,14 +11,18 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/code-projects/packages/auto-config/version 3.0/certbot.c" "CMakeFiles/nap.dir/certbot.c.o" "gcc" "CMakeFiles/nap.dir/certbot.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/directory.c" "CMakeFiles/nap.dir/directory.c.o" "gcc" "CMakeFiles/nap.dir/directory.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/domain.c" "CMakeFiles/nap.dir/domain.c.o" "gcc" "CMakeFiles/nap.dir/domain.c.o.d"
+  "/mnt/code-projects/packages/auto-config/version 3.0/gui-install.c" "CMakeFiles/nap.dir/gui-install.c.o" "gcc" "CMakeFiles/nap.dir/gui-install.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/gui.c" "CMakeFiles/nap.dir/gui.c.o" "gcc" "CMakeFiles/nap.dir/gui.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/jellyfin.c" "CMakeFiles/nap.dir/jellyfin.c.o" "gcc" "CMakeFiles/nap.dir/jellyfin.c.o.d"
+  "/mnt/code-projects/packages/auto-config/version 3.0/lan-ip.c" "CMakeFiles/nap.dir/lan-ip.c.o" "gcc" "CMakeFiles/nap.dir/lan-ip.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/manual.c" "CMakeFiles/nap.dir/manual.c.o" "gcc" "CMakeFiles/nap.dir/manual.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/nextcloud.c" "CMakeFiles/nap.dir/nextcloud.c.o" "gcc" "CMakeFiles/nap.dir/nextcloud.c.o.d"
+  "/mnt/code-projects/packages/auto-config/version 3.0/nginx_json.c" "CMakeFiles/nap.dir/nginx_json.c.o" "gcc" "CMakeFiles/nap.dir/nginx_json.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/plex.c" "CMakeFiles/nap.dir/plex.c.o" "gcc" "CMakeFiles/nap.dir/plex.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/presets.c" "CMakeFiles/nap.dir/presets.c.o" "gcc" "CMakeFiles/nap.dir/presets.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/proxy.c" "CMakeFiles/nap.dir/proxy.c.o" "gcc" "CMakeFiles/nap.dir/proxy.c.o.d"
   "/mnt/code-projects/packages/auto-config/version 3.0/start.c" "CMakeFiles/nap.dir/start.c.o" "gcc" "CMakeFiles/nap.dir/start.c.o.d"
+  "/mnt/code-projects/packages/auto-config/version 3.0/update.c" "CMakeFiles/nap.dir/update.c.o" "gcc" "CMakeFiles/nap.dir/update.c.o.d"
   "" "nap" "gcc" "CMakeFiles/nap.dir/link.d"
   )
 

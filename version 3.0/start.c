@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include "config.h"
 
 char domain_name[256];
@@ -12,12 +14,6 @@ char enabled_path[256];
 char certbot_cmd[256];
 char lan_ip[256];
 
-void update_check()
-{
-  printf("\nupdates not setup yet\n\n");
-  return;
-}
-
 int root_check()
 {
   if (geteuid() != 0)
@@ -28,14 +24,27 @@ int root_check()
   return 0;
 }
 
-int main()
+// from here
+int main(int argc, char *argv[])
 {
+  if (argc >= 3 && strcmp(argv[1], "--json") == 0)
+  {
+    return handle_json_mode(argv[2]);
+  } //to here is part of the vibe coded GUI
+
   char one;
   if (root_check() != 0) return 0;
-  update_check();
+  update();
 
   printf("\nwelcome to N.A.P. %s!\n\n", CURRENT_VERSION);
   
+  if (system("ls /var/www/auto-config > /dev/null 2>&1") == 0)
+  {
+    find_ip();
+    printf("Visit \033[34mhttp://%s:3487\033[0m in your browser to use the GUI\n\n", lan_ip);
+  }
+
+
   printf("Would you like to pick between presets? y/n: ");
   scanf(" %c", &one);
   if (one == 'y')

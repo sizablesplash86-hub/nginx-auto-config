@@ -5,7 +5,10 @@
 
 void install_gui(void)
 {
-  system("sudo apt install php php-cli php-common -y");
+  printf("Installing dependencies...\n\n");
+  system("sudo apt install php-cli php-fpm php-common -y");
+
+  printf("Creating GUI...\n\n");
   system("mkdir /var/www/auto-config");
   
   snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/auto-config");
@@ -30,7 +33,7 @@ void install_gui(void)
 
   fclose(fp);
 
-  snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled");
+  snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/auto-config");
   symlink(avail_path, enabled_path);
 
   if (system("sudo nginx -t") != 0)
@@ -40,6 +43,7 @@ void install_gui(void)
     unlink(avail_path);
     unlink(enabled_path);
     system("sudo nginx -t");
+    printf("Exiting now...\n\n");
     return;
   }
 
@@ -402,10 +406,14 @@ void install_gui(void)
 
   fclose(ph);
 
+  //test these
+  system("echo 'www-data ALL=(ALL) NOPASSWD: /usr/local/bin/nginx-auto' | sudo tee /etc/sudoers.d/nginx-auto > /dev/null");
+  system("chmod 0440 /etc/sudoers.d/nginx-auto");
+
   system("sudo systemctl reload nginx");
 
   find_ip();
-  printf("Visit http://%s:3487 to use the GUI\n\n", lan_ip);
+  printf("Visit \033[34mhttp://%s:3487\033[0m to use the GUI\n\n", lan_ip);
 
   return;
 }

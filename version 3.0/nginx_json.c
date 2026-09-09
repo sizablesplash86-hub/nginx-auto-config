@@ -1,19 +1,14 @@
+//entirely vibe coded
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "nginx_auto.h"
+#include "config.h"
 
-int main(int argc, char *argv[]) {
-    if (root_check() != 0) return 1;
-
-    if (argc < 3 || strcmp(argv[1], "--json") != 0) {
-        printf("Usage: %s --json /path/to/file.json\n", argv[0]);
-        return 1;
-    }
-
-    FILE *f = fopen(argv[2], "r");
+int handle_json_mode(const char *json_filepath) {
+    FILE *f = fopen(json_filepath, "r");
     if (!f) {
-        printf("Error: Unable to open JSON file %s\n", argv[2]);
+        printf("Error: Unable to open JSON file %s\n", json_filepath);
         return 1;
     }
 
@@ -22,25 +17,33 @@ int main(int argc, char *argv[]) {
     fseek(f, 0, SEEK_SET);
 
     char *json_buf = malloc(len + 1);
+    if (!json_buf) {
+        fclose(f);
+        return 1;
+    }
     fread(json_buf, 1, len, f);
     fclose(f);
     json_buf[len] = '\0';
 
-    ConfigPayload config = {0};
-
-    sscanf(strstr(json_buf, "\"preset\":") ? strstr(json_buf, "\"preset\":") : "", "\"preset\": \"%255[^\"]\"", config.preset);
-    sscanf(strstr(json_buf, "\"name\":") ? strstr(json_buf, "\"name\":") : "", "\"name\": \"%255[^\"]\"", config.name);
-    sscanf(strstr(json_buf, "\"domain\":") ? strstr(json_buf, "\"domain\":") : "", "\"domain\": \"%255[^\"]\"", config.domain);
-    sscanf(strstr(json_buf, "\"port\":") ? strstr(json_buf, "\"port\":") : "", "\"port\": \"%255[^\"]\"", config.port);
-    sscanf(strstr(json_buf, "\"path\":") ? strstr(json_buf, "\"path\":") : "", "\"path\": \"%255[^\"]\"", config.path);
-    sscanf(strstr(json_buf, "\"phpver\":") ? strstr(json_buf, "\"phpver\":") : "", "\"phpver\": \"%255[^\"]\"", config.phpver);
+    // Parse values from JSON string
+    sscanf(strstr(json_buf, "\"name\":") ? strstr(json_buf, "\"name\":") : "", "\"name\": \"%255[^\"]\"", config_name);
+    sscanf(strstr(json_buf, "\"domain\":") ? strstr(json_buf, "\"domain\":") : "", "\"domain\": \"%255[^\"]\"", domain_name);
+    sscanf(strstr(json_buf, "\"port\":") ? strstr(json_buf, "\"port\":") : "", "\"port\": \"%255[^\"]\"", proxy);
+    sscanf(strstr(json_buf, "\"path\":") ? strstr(json_buf, "\"path\":") : "", "\"path\": \"%255[^\"]\"", directory);
 
     free(json_buf);
 
-    if (strlen(config.name) == 0 || strlen(config.domain) == 0) {
-        printf("Error: Missing required fields in JSON payload\n");
+    if (strlen(config_name) == 0 || strlen(domain_name) == 0) {
+        printf("Error: Missing required fields (name or domain) in JSON payload\n");
         return 1;
     }
 
-    return apply_nginx_config(&config);
+    // Build NGINX file based on proxy vs directory input
+    if (strlen(proxy) > 0) {
+        run_proxy();
+    } else if (strlen(directory) > 0) {
+        run_directory();
+    }
+
+    return 0;
 }

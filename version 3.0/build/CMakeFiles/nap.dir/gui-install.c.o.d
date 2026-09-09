@@ -1,5 +1,5 @@
-CMakeFiles/nap.dir/gui.c.o: \
- /mnt/code-projects/packages/auto-config/version\ 3.0/gui.c \
+CMakeFiles/nap.dir/gui-install.c.o: \
+ /mnt/code-projects/packages/auto-config/version\ 3.0/gui-install.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

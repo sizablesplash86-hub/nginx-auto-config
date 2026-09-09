@@ -201,6 +201,30 @@ domain.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.s
 .PHONY : domain.c.s
 
+gui-install.o: gui-install.c.o
+.PHONY : gui-install.o
+
+# target to build an object file
+gui-install.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui-install.c.o
+.PHONY : gui-install.c.o
+
+gui-install.i: gui-install.c.i
+.PHONY : gui-install.i
+
+# target to preprocess a source file
+gui-install.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui-install.c.i
+.PHONY : gui-install.c.i
+
+gui-install.s: gui-install.c.s
+.PHONY : gui-install.s
+
+# target to generate assembly for a file
+gui-install.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui-install.c.s
+.PHONY : gui-install.c.s
+
 gui.o: gui.c.o
 .PHONY : gui.o
 
@@ -249,6 +273,30 @@ jellyfin.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.s
 .PHONY : jellyfin.c.s
 
+lan-ip.o: lan-ip.c.o
+.PHONY : lan-ip.o
+
+# target to build an object file
+lan-ip.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/lan-ip.c.o
+.PHONY : lan-ip.c.o
+
+lan-ip.i: lan-ip.c.i
+.PHONY : lan-ip.i
+
+# target to preprocess a source file
+lan-ip.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/lan-ip.c.i
+.PHONY : lan-ip.c.i
+
+lan-ip.s: lan-ip.c.s
+.PHONY : lan-ip.s
+
+# target to generate assembly for a file
+lan-ip.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/lan-ip.c.s
+.PHONY : lan-ip.c.s
+
 manual.o: manual.c.o
 .PHONY : manual.o
 
@@ -296,6 +344,30 @@ nextcloud.s: nextcloud.c.s
 nextcloud.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.s
 .PHONY : nextcloud.c.s
+
+nginx_json.o: nginx_json.c.o
+.PHONY : nginx_json.o
+
+# target to build an object file
+nginx_json.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx_json.c.o
+.PHONY : nginx_json.c.o
+
+nginx_json.i: nginx_json.c.i
+.PHONY : nginx_json.i
+
+# target to preprocess a source file
+nginx_json.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx_json.c.i
+.PHONY : nginx_json.c.i
+
+nginx_json.s: nginx_json.c.s
+.PHONY : nginx_json.s
+
+# target to generate assembly for a file
+nginx_json.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx_json.c.s
+.PHONY : nginx_json.c.s
 
 plex.o: plex.c.o
 .PHONY : plex.o
@@ -393,6 +465,30 @@ start.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/start.c.s
 .PHONY : start.c.s
 
+update.o: update.c.o
+.PHONY : update.o
+
+# target to build an object file
+update.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/update.c.o
+.PHONY : update.c.o
+
+update.i: update.c.i
+.PHONY : update.i
+
+# target to preprocess a source file
+update.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/update.c.i
+.PHONY : update.c.i
+
+update.s: update.c.s
+.PHONY : update.s
+
+# target to generate assembly for a file
+update.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/update.c.s
+.PHONY : update.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -411,18 +507,27 @@ help:
 	@echo "... domain.o"
 	@echo "... domain.i"
 	@echo "... domain.s"
+	@echo "... gui-install.o"
+	@echo "... gui-install.i"
+	@echo "... gui-install.s"
 	@echo "... gui.o"
 	@echo "... gui.i"
 	@echo "... gui.s"
 	@echo "... jellyfin.o"
 	@echo "... jellyfin.i"
 	@echo "... jellyfin.s"
+	@echo "... lan-ip.o"
+	@echo "... lan-ip.i"
+	@echo "... lan-ip.s"
 	@echo "... manual.o"
 	@echo "... manual.i"
 	@echo "... manual.s"
 	@echo "... nextcloud.o"
 	@echo "... nextcloud.i"
 	@echo "... nextcloud.s"
+	@echo "... nginx_json.o"
+	@echo "... nginx_json.i"
+	@echo "... nginx_json.s"
 	@echo "... plex.o"
 	@echo "... plex.i"
 	@echo "... plex.s"
@@ -435,6 +540,9 @@ help:
 	@echo "... start.o"
 	@echo "... start.i"
 	@echo "... start.s"
+	@echo "... update.o"
+	@echo "... update.i"
+	@echo "... update.s"
 .PHONY : help
 
 

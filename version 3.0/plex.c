@@ -32,7 +32,7 @@ void run_plex(void)
 
   fclose(fp);
 
-  snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled");
+  snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/plex");
   symlink(avail_path, enabled_path);
 
   certbot();
