@@ -2,6 +2,16 @@
 #include <unistd.h>
 #include "config.h"
 
+char domain_name[256];
+char config_name[256];
+char proxy[256];
+char directory[256];
+char php_ver[256];
+char avail_path[256];
+char enabled_path[256];
+char certbot_cmd[256];
+char lan_ip[256];
+
 void update_check()
 {
   printf("\nupdates not setup yet\n\n");
@@ -12,11 +22,9 @@ int root_check()
 {
   if (geteuid() != 0)
   {
-    printf("not in root\n\n");
+    printf("\n\033[31mEnter root first\033[0m\n\n");
     return 1;
   }
-  //printf("\nroot check not setup yet\n\n");
-  printf("in root\n\n");
   return 0;
 }
 

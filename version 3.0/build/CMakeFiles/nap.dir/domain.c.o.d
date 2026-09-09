@@ -1,5 +1,5 @@
-CMakeFiles/nap.dir/manual.c.o: \
- /mnt/code-projects/packages/auto-config/version\ 3.0/manual.c \
+CMakeFiles/nap.dir/domain.c.o: \
+ /mnt/code-projects/packages/auto-config/version\ 3.0/domain.c \
  /usr/include/stdc-predef.h /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -23,5 +23,8 @@ CMakeFiles/nap.dir/manual.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/strings.h \
  /mnt/code-projects/packages/auto-config/version\ 3.0/config.h

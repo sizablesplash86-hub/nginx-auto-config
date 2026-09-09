@@ -129,6 +129,126 @@ nap/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/build
 .PHONY : nap/fast
 
+certbot.o: certbot.c.o
+.PHONY : certbot.o
+
+# target to build an object file
+certbot.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/certbot.c.o
+.PHONY : certbot.c.o
+
+certbot.i: certbot.c.i
+.PHONY : certbot.i
+
+# target to preprocess a source file
+certbot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/certbot.c.i
+.PHONY : certbot.c.i
+
+certbot.s: certbot.c.s
+.PHONY : certbot.s
+
+# target to generate assembly for a file
+certbot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/certbot.c.s
+.PHONY : certbot.c.s
+
+directory.o: directory.c.o
+.PHONY : directory.o
+
+# target to build an object file
+directory.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/directory.c.o
+.PHONY : directory.c.o
+
+directory.i: directory.c.i
+.PHONY : directory.i
+
+# target to preprocess a source file
+directory.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/directory.c.i
+.PHONY : directory.c.i
+
+directory.s: directory.c.s
+.PHONY : directory.s
+
+# target to generate assembly for a file
+directory.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/directory.c.s
+.PHONY : directory.c.s
+
+domain.o: domain.c.o
+.PHONY : domain.o
+
+# target to build an object file
+domain.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.o
+.PHONY : domain.c.o
+
+domain.i: domain.c.i
+.PHONY : domain.i
+
+# target to preprocess a source file
+domain.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.i
+.PHONY : domain.c.i
+
+domain.s: domain.c.s
+.PHONY : domain.s
+
+# target to generate assembly for a file
+domain.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.s
+.PHONY : domain.c.s
+
+gui.o: gui.c.o
+.PHONY : gui.o
+
+# target to build an object file
+gui.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui.c.o
+.PHONY : gui.c.o
+
+gui.i: gui.c.i
+.PHONY : gui.i
+
+# target to preprocess a source file
+gui.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui.c.i
+.PHONY : gui.c.i
+
+gui.s: gui.c.s
+.PHONY : gui.s
+
+# target to generate assembly for a file
+gui.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui.c.s
+.PHONY : gui.c.s
+
+jellyfin.o: jellyfin.c.o
+.PHONY : jellyfin.o
+
+# target to build an object file
+jellyfin.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.o
+.PHONY : jellyfin.c.o
+
+jellyfin.i: jellyfin.c.i
+.PHONY : jellyfin.i
+
+# target to preprocess a source file
+jellyfin.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.i
+.PHONY : jellyfin.c.i
+
+jellyfin.s: jellyfin.c.s
+.PHONY : jellyfin.s
+
+# target to generate assembly for a file
+jellyfin.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.s
+.PHONY : jellyfin.c.s
+
 manual.o: manual.c.o
 .PHONY : manual.o
 
@@ -153,6 +273,54 @@ manual.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.s
 .PHONY : manual.c.s
 
+nextcloud.o: nextcloud.c.o
+.PHONY : nextcloud.o
+
+# target to build an object file
+nextcloud.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.o
+.PHONY : nextcloud.c.o
+
+nextcloud.i: nextcloud.c.i
+.PHONY : nextcloud.i
+
+# target to preprocess a source file
+nextcloud.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.i
+.PHONY : nextcloud.c.i
+
+nextcloud.s: nextcloud.c.s
+.PHONY : nextcloud.s
+
+# target to generate assembly for a file
+nextcloud.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.s
+.PHONY : nextcloud.c.s
+
+plex.o: plex.c.o
+.PHONY : plex.o
+
+# target to build an object file
+plex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/plex.c.o
+.PHONY : plex.c.o
+
+plex.i: plex.c.i
+.PHONY : plex.i
+
+# target to preprocess a source file
+plex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/plex.c.i
+.PHONY : plex.c.i
+
+plex.s: plex.c.s
+.PHONY : plex.s
+
+# target to generate assembly for a file
+plex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/plex.c.s
+.PHONY : plex.c.s
+
 presets.o: presets.c.o
 .PHONY : presets.o
 
@@ -176,6 +344,30 @@ presets.s: presets.c.s
 presets.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/presets.c.s
 .PHONY : presets.c.s
+
+proxy.o: proxy.c.o
+.PHONY : proxy.o
+
+# target to build an object file
+proxy.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/proxy.c.o
+.PHONY : proxy.c.o
+
+proxy.i: proxy.c.i
+.PHONY : proxy.i
+
+# target to preprocess a source file
+proxy.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/proxy.c.i
+.PHONY : proxy.c.i
+
+proxy.s: proxy.c.s
+.PHONY : proxy.s
+
+# target to generate assembly for a file
+proxy.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/proxy.c.s
+.PHONY : proxy.c.s
 
 start.o: start.c.o
 .PHONY : start.o
@@ -210,12 +402,36 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... nap"
+	@echo "... certbot.o"
+	@echo "... certbot.i"
+	@echo "... certbot.s"
+	@echo "... directory.o"
+	@echo "... directory.i"
+	@echo "... directory.s"
+	@echo "... domain.o"
+	@echo "... domain.i"
+	@echo "... domain.s"
+	@echo "... gui.o"
+	@echo "... gui.i"
+	@echo "... gui.s"
+	@echo "... jellyfin.o"
+	@echo "... jellyfin.i"
+	@echo "... jellyfin.s"
 	@echo "... manual.o"
 	@echo "... manual.i"
 	@echo "... manual.s"
+	@echo "... nextcloud.o"
+	@echo "... nextcloud.i"
+	@echo "... nextcloud.s"
+	@echo "... plex.o"
+	@echo "... plex.i"
+	@echo "... plex.s"
 	@echo "... presets.o"
 	@echo "... presets.i"
 	@echo "... presets.s"
+	@echo "... proxy.o"
+	@echo "... proxy.i"
+	@echo "... proxy.s"
 	@echo "... start.o"
 	@echo "... start.i"
 	@echo "... start.s"

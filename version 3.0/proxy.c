@@ -1,14 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "config.h"
 
 void run_proxy(void)
 {
-  printf("Input domain name: ");
-  fgets(domain_name, sizeof(domain_name), stdin);
-  domain_name[strcspn(domain_name, "\n")] = 0;
+  run_domain_name();
 
   printf("Input config name: ");
   fgets(config_name, sizeof(config_name), stdin);
@@ -45,42 +42,7 @@ void run_proxy(void)
   snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/%s", config_name);
   symlink(avail_path, enabled_path);
 
-  if (system("sudo nginx -t") != 0)
-  {
-    printf("\033[31mUNKNOWN ERROR OCCURRED\033[0m\n");
-    //printf("Would you like to save a log? (y or n): ");
-    printf("Removing broken configuration...\n");
-    unlink(avail_path);
-    unlink(enabled_path);
-    system("sudo nginx -t");
-    return;
-  }
-
-  //remove this here
-  snprintf(certbot_cmd, sizeof(certbot_cmd), "sudo certbot --nginx -d %s", domain_name);
-
-  if (system(certbot_cmd) != 0)
-  {
-    char rem;
-    printf("\033[31mERROR\033[0m SSL certificate failed to deploy\n\n");
-    printf("Would you like to remove broken config? (y/n): ");
-    scanf(" %c", &rem);
-
-    if (rem == 'y')
-    {
-      printf("Removing configuration...\n\n");
-      unlink(avail_path);
-      unlink(enabled_path);
-      system("sudo nginx -t");
-      return;
-    }
-    
-    if (rem == 'n' || rem == 'q')
-    {
-      printf("Config not removed. Exiting now...\n\n");
-      return;
-    }
-  }
+  certbot();
 
   return;
 }

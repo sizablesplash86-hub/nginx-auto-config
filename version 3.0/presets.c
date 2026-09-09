@@ -26,5 +26,11 @@ void run_presets(void)
   {
     run_gui();
   }
+
+  if (two == '5')
+  {
+    install_gui();
+  }
+
   return;
 }

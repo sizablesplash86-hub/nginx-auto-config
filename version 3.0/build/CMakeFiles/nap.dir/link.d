@@ -5,6 +5,14 @@ nap: \
   CMakeFiles/nap.dir/start.c.o \
   CMakeFiles/nap.dir/presets.c.o \
   CMakeFiles/nap.dir/manual.c.o \
+  CMakeFiles/nap.dir/jellyfin.c.o \
+  CMakeFiles/nap.dir/plex.c.o \
+  CMakeFiles/nap.dir/nextcloud.c.o \
+  CMakeFiles/nap.dir/gui.c.o \
+  CMakeFiles/nap.dir/proxy.c.o \
+  CMakeFiles/nap.dir/directory.c.o \
+  CMakeFiles/nap.dir/certbot.c.o \
+  CMakeFiles/nap.dir/domain.c.o \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
   /usr/lib/gcc/x86_64-linux-gnu/14/libgcc_s.so \
@@ -38,6 +46,22 @@ CMakeFiles/nap.dir/start.c.o:
 CMakeFiles/nap.dir/presets.c.o:
 
 CMakeFiles/nap.dir/manual.c.o:
+
+CMakeFiles/nap.dir/jellyfin.c.o:
+
+CMakeFiles/nap.dir/plex.c.o:
+
+CMakeFiles/nap.dir/nextcloud.c.o:
+
+CMakeFiles/nap.dir/gui.c.o:
+
+CMakeFiles/nap.dir/proxy.c.o:
+
+CMakeFiles/nap.dir/directory.c.o:
+
+CMakeFiles/nap.dir/certbot.c.o:
+
+CMakeFiles/nap.dir/domain.c.o:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/libgcc.a:
 

@@ -3,8 +3,12 @@
 
 void run_manual(void)
 {
+  /*
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF);  */
+
   char ent;
-  printf("Input 1 for proxy or 2 for directory");
+  printf("Input 1 for proxy or 2 for directory: ");
   scanf(" %c", &ent);
 
   if (ent == '1')

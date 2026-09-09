@@ -114,11 +114,131 @@ CMakeFiles/nap.dir/manual.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/manual.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/manual.c" -o CMakeFiles/nap.dir/manual.c.s
 
+CMakeFiles/nap.dir/jellyfin.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/jellyfin.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/jellyfin.c
+CMakeFiles/nap.dir/jellyfin.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/nap.dir/jellyfin.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/jellyfin.c.o -MF CMakeFiles/nap.dir/jellyfin.c.o.d -o CMakeFiles/nap.dir/jellyfin.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/jellyfin.c"
+
+CMakeFiles/nap.dir/jellyfin.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/jellyfin.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/jellyfin.c" > CMakeFiles/nap.dir/jellyfin.c.i
+
+CMakeFiles/nap.dir/jellyfin.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/jellyfin.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/jellyfin.c" -o CMakeFiles/nap.dir/jellyfin.c.s
+
+CMakeFiles/nap.dir/plex.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/plex.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/plex.c
+CMakeFiles/nap.dir/plex.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/nap.dir/plex.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/plex.c.o -MF CMakeFiles/nap.dir/plex.c.o.d -o CMakeFiles/nap.dir/plex.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/plex.c"
+
+CMakeFiles/nap.dir/plex.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/plex.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/plex.c" > CMakeFiles/nap.dir/plex.c.i
+
+CMakeFiles/nap.dir/plex.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/plex.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/plex.c" -o CMakeFiles/nap.dir/plex.c.s
+
+CMakeFiles/nap.dir/nextcloud.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/nextcloud.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/nextcloud.c
+CMakeFiles/nap.dir/nextcloud.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/nap.dir/nextcloud.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/nextcloud.c.o -MF CMakeFiles/nap.dir/nextcloud.c.o.d -o CMakeFiles/nap.dir/nextcloud.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/nextcloud.c"
+
+CMakeFiles/nap.dir/nextcloud.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/nextcloud.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/nextcloud.c" > CMakeFiles/nap.dir/nextcloud.c.i
+
+CMakeFiles/nap.dir/nextcloud.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/nextcloud.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/nextcloud.c" -o CMakeFiles/nap.dir/nextcloud.c.s
+
+CMakeFiles/nap.dir/gui.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/gui.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/gui.c
+CMakeFiles/nap.dir/gui.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/nap.dir/gui.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/gui.c.o -MF CMakeFiles/nap.dir/gui.c.o.d -o CMakeFiles/nap.dir/gui.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/gui.c"
+
+CMakeFiles/nap.dir/gui.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/gui.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/gui.c" > CMakeFiles/nap.dir/gui.c.i
+
+CMakeFiles/nap.dir/gui.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/gui.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/gui.c" -o CMakeFiles/nap.dir/gui.c.s
+
+CMakeFiles/nap.dir/proxy.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/proxy.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/proxy.c
+CMakeFiles/nap.dir/proxy.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/nap.dir/proxy.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/proxy.c.o -MF CMakeFiles/nap.dir/proxy.c.o.d -o CMakeFiles/nap.dir/proxy.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/proxy.c"
+
+CMakeFiles/nap.dir/proxy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/proxy.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/proxy.c" > CMakeFiles/nap.dir/proxy.c.i
+
+CMakeFiles/nap.dir/proxy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/proxy.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/proxy.c" -o CMakeFiles/nap.dir/proxy.c.s
+
+CMakeFiles/nap.dir/directory.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/directory.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/directory.c
+CMakeFiles/nap.dir/directory.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/nap.dir/directory.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/directory.c.o -MF CMakeFiles/nap.dir/directory.c.o.d -o CMakeFiles/nap.dir/directory.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/directory.c"
+
+CMakeFiles/nap.dir/directory.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/directory.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/directory.c" > CMakeFiles/nap.dir/directory.c.i
+
+CMakeFiles/nap.dir/directory.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/directory.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/directory.c" -o CMakeFiles/nap.dir/directory.c.s
+
+CMakeFiles/nap.dir/certbot.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/certbot.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/certbot.c
+CMakeFiles/nap.dir/certbot.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/nap.dir/certbot.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/certbot.c.o -MF CMakeFiles/nap.dir/certbot.c.o.d -o CMakeFiles/nap.dir/certbot.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/certbot.c"
+
+CMakeFiles/nap.dir/certbot.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/certbot.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/certbot.c" > CMakeFiles/nap.dir/certbot.c.i
+
+CMakeFiles/nap.dir/certbot.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/certbot.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/certbot.c" -o CMakeFiles/nap.dir/certbot.c.s
+
+CMakeFiles/nap.dir/domain.c.o: CMakeFiles/nap.dir/flags.make
+CMakeFiles/nap.dir/domain.c.o: /mnt/code-projects/packages/auto-config/version\ 3.0/domain.c
+CMakeFiles/nap.dir/domain.c.o: CMakeFiles/nap.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/nap.dir/domain.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/nap.dir/domain.c.o -MF CMakeFiles/nap.dir/domain.c.o.d -o CMakeFiles/nap.dir/domain.c.o -c "/mnt/code-projects/packages/auto-config/version 3.0/domain.c"
+
+CMakeFiles/nap.dir/domain.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/nap.dir/domain.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/code-projects/packages/auto-config/version 3.0/domain.c" > CMakeFiles/nap.dir/domain.c.i
+
+CMakeFiles/nap.dir/domain.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/nap.dir/domain.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/code-projects/packages/auto-config/version 3.0/domain.c" -o CMakeFiles/nap.dir/domain.c.s
+
 # Object files for target nap
 nap_OBJECTS = \
 "CMakeFiles/nap.dir/start.c.o" \
 "CMakeFiles/nap.dir/presets.c.o" \
-"CMakeFiles/nap.dir/manual.c.o"
+"CMakeFiles/nap.dir/manual.c.o" \
+"CMakeFiles/nap.dir/jellyfin.c.o" \
+"CMakeFiles/nap.dir/plex.c.o" \
+"CMakeFiles/nap.dir/nextcloud.c.o" \
+"CMakeFiles/nap.dir/gui.c.o" \
+"CMakeFiles/nap.dir/proxy.c.o" \
+"CMakeFiles/nap.dir/directory.c.o" \
+"CMakeFiles/nap.dir/certbot.c.o" \
+"CMakeFiles/nap.dir/domain.c.o"
 
 # External object files for target nap
 nap_EXTERNAL_OBJECTS =
@@ -126,10 +246,18 @@ nap_EXTERNAL_OBJECTS =
 nap: CMakeFiles/nap.dir/start.c.o
 nap: CMakeFiles/nap.dir/presets.c.o
 nap: CMakeFiles/nap.dir/manual.c.o
+nap: CMakeFiles/nap.dir/jellyfin.c.o
+nap: CMakeFiles/nap.dir/plex.c.o
+nap: CMakeFiles/nap.dir/nextcloud.c.o
+nap: CMakeFiles/nap.dir/gui.c.o
+nap: CMakeFiles/nap.dir/proxy.c.o
+nap: CMakeFiles/nap.dir/directory.c.o
+nap: CMakeFiles/nap.dir/certbot.c.o
+nap: CMakeFiles/nap.dir/domain.c.o
 nap: CMakeFiles/nap.dir/build.make
 nap: CMakeFiles/nap.dir/compiler_depend.ts
 nap: CMakeFiles/nap.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable nap"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/code-projects/packages/auto-config/version 3.0/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Linking C executable nap"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/nap.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
