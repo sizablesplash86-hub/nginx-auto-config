@@ -3,8 +3,8 @@ set -e
 
 # Configuration
 DEB_URL="https://repo.sizablesplash.com/auto-config/releases/v3.0.0/auto-config_3.0.0_amd64.deb"
-WEB_URL_INDEX="https://repo.sizablesplash.com/auto-config/releases/gui/index.html"
-WEB_URL_API="https://repo.sizablesplash.com/auto-config/releases/gui/api.php"
+WEB_URL_INDEX="https://repo.sizablesplash.com/auto-config/releases/gui/gui.html"
+WEB_URL_API="https://repo.sizablesplash.com/auto-config/releases/gui/gui.php"
 
 TEMP_DEB="$(mktemp /tmp/auto-config-XXXXXX.deb)"
 
@@ -42,33 +42,80 @@ if [ -t 0 ]; then
 fi
 
 if [ "$INSTALL_GUI" = "y" ]; then
-    echo "--> Installing Web GUI..."
+    echo "--> Installing Web GUI dependencies..."
 
-    # Detect Web Server Root
-    WEB_ROOT="/var/www/auto-config"
-    if [ ! -d "$WEB_ROOT" ]; then
-        mkdir -p "$WEB_ROOT"
+    # Install PHP and FastCGI
+    apt-get install -y -qq php-fpm php-json > /dev/null
+
+    # Detect the correct PHP-FPM socket location on Debian/Ubuntu
+    PHP_SOCK=""
+    if [ -S "/run/php/php-fpm.sock" ]; then
+        PHP_SOCK="unix:/run/php/php-fpm.sock"
+    else
+        # Find active PHP version socket (e.g., /run/php/php8.2-fpm.sock)
+        DETECTED_SOCK=$(ls /run/php/php*-fpm.sock 2>/dev/null | head -n 1)
+        if [ -n "$DETECTED_SOCK" ]; then
+            PHP_SOCK="unix:$DETECTED_SOCK"
+        else
+            PHP_SOCK="unix:/run/php/php-fpm.sock"
+        fi
     fi
 
-    # Download GUI Interface Files
+    # Web Directory Setup
+    GUI_DIR="/var/www/auto-config"
+    mkdir -p "$GUI_DIR"
+
     echo "--> Fetching Web GUI interface components..."
-    curl -sSL "$WEB_URL_INDEX" -o "$WEB_ROOT/index.html"
-    curl -sSL "$WEB_URL_API" -o "$WEB_ROOT/api.php"
+#   curl -sSL "$WEB_URL_INDEX" -o "$GUI_DIR/index.html"
+#   curl -sSL "$WEB_URL_API" -o "$GUI_DIR/api.php"
 
-    # Set web server ownership (www-data)
     if id "www-data" &>/dev/null; then
-        chown -R www-data:www-data "$WEB_ROOT"
-        chmod 644 "$WEB_ROOT/index.html"
-        chmod 644 "$WEB_ROOT/api.php"
+        chown -R www-data:www-data "$GUI_DIR"
+        chmod 644 "$GUI_DIR/index.html"
+        chmod 644 "$GUI_DIR/api.php"
     fi
 
-    # Configure sudoers entry for non-interactive execution from api.php
+    # Configure sudoers entry for www-data execution
     SUDOERS_FILE="/etc/sudoers.d/nginx-auto-gui"
-    echo "--> Configuring passwordless sudo permissions for www-data..."
     echo "www-data ALL=(ALL) NOPASSWD: /usr/local/bin/nginx-auto --json *" > "$SUDOERS_FILE"
     chmod 0440 "$SUDOERS_FILE"
 
-    echo "--> Web GUI installation complete! Files deployed to $WEB_ROOT."
+    # Deploy NGINX Configuration Site Block
+    echo "--> Configuring NGINX site block for Web GUI (Port 3487)..."
+    CONF_AVAILABLE="/etc/nginx/sites-available/auto-config-gui"
+    CONF_ENABLED="/etc/nginx/sites-enabled/auto-config-gui"
+
+    cat <<EOF > "$CONF_AVAILABLE"
+server {
+  listen 3487;
+
+  server_name _;
+
+  root /var/www/auto-config;
+  index index.php index.html index.htm;
+
+  location / {
+    autoindex on;
+    try_files \$uri \$uri/ =404;
+  }
+
+  location ~ \.php$ {
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass $PHP_SOCK;
+  }
+}
+EOF
+
+    # Enable site and test configuration
+    ln -sf "$CONF_AVAILABLE" "$CONF_ENABLED"
+
+    echo "--> Verifying and reloading NGINX..."
+    if nginx -t >/dev/null 2>&1; then
+        systemctl reload nginx
+        echo "--> Web GUI successfully configured on 127.0.0.1:3487"
+    else
+        echo "--> Warning: NGINX configuration test failed. Please check /etc/nginx/sites-available/auto-config-gui manually."
+    fi
 fi
 
 echo "=================================================="

@@ -1,3 +1,4 @@
+<!--making sure this is right-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +121,10 @@
             <label for="preset">Configuration Mode</label>
             <select id="preset" onchange="toggleFields()">
                 <option value="jellyfin">Preset: Jellyfin Reverse Proxy</option>
-                <option value="nextcloud">Preset: Nextcloud LEMP Stack</option>
+<!--            <option value="plex">Preset: Plex Reverse Proxy</option>
+                <option value="gui">Preset: N.A.P GUI</option>
+                <option value="gui_install">Preset: GUI Install</option>     -->
+                <option value="nextcloud">Preset: Nextcloud LEMP Stacks</option>
                 <option value="custom_proxy">Custom: Reverse Proxy</option>
                 <option value="custom_static">Custom: Static Directory</option>
             </select>
@@ -199,9 +203,8 @@ function generateConfig() {
     const path = document.getElementById('path').value || '/var/www/html';
     let phpver = document.getElementById('phpver').value || 'auto';
     
-    // Default fallback display if auto is selected
     if (phpver === 'auto') {
-        phpver = '8.2'; // PHP-FPM default socket fallback for preview
+        phpver = '8.2';
     }
 
     let config = '';
@@ -305,7 +308,6 @@ async function applyConfig() {
     }
 }
 
-// Initial render
 generateConfig();
 </script>
 

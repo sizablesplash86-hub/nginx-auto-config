@@ -30,21 +30,27 @@ cmake --build .
 to update:
 
 #removes binary
+cd /mnt/code-projects/packages/auto-config/'version 3.0'/build
 rm -f /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg/usr/local/bin/auto-config
 #change the version release in the line
 nano /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg/DEBIAN/control
 #compiles to the build creator thing
 cmake --build .
-mv nap /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg/usr/local/bin/auto-config
+mv nap /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg/usr/local/bin/nginx-auto
 #change for respective version
 mkdir -p /mnt/code-projects/packages/auto-config/repository/releases/v3.0.0
 #output to releases      change per version
 dpkg-deb --build /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg /mnt/code-projects/packages/auto-config/repository/releases/v3.0.0/auto-config_3.0.0_amd64.deb
 
 git status
-
 git add .
 #change with what added
-git commit -m "Version 2.0 in isolated beta"
+git commit -m "working on things"
+
+cd /mnt/code-projects/auto-config
+git status
+git add .
+#change with what added
+git commit -m "working on things"
 
 git push origin main

@@ -21,19 +21,33 @@ void run_directory(void)
 
   if (system("php -v > /dev/null 2>&1") == 0)
   {
+    FILE *cmd = popen("php -r 'echo PHP_MAJOR_VERSION.\".\".PHP_MINOR_VERSION;' 2>/dev/null", "r");
+
+    if (cmd == NULL || fgets(php_ver, sizeof(php_ver), cmd) == NULL || strlen(php_ver) == 0)
+    {
+      if (cmd != NULL)
+      {
+        pclose(cmd);
+      }
+    }
+
     fprintf(fp,
       "server {\n"
       "  listen 80;\n"
       "  listen [::]:80;\n\n"
       "  server_name %s;\n\n"
       "  root %s;\n"
-      "  index index.html index.htm index.php;\n\n"
+      "  index index.php index.html index.htm;\n\n"
       "  location / {\n"
       "    autoindex on;\n"
-      "    try_files $uri $uri/ $uri/index.html $uri.html $uri.php =404;\n"
+      "    try_files $uri $uri/ =404;\n"
+      "  }\n\n"
+      "  location ~ \\.php$ {\n"
+      "    include snippets/fastcgi-php.conf;\n"
+      "    fastcgi_pass unix:/run/php/php%s-fpm.sock;\n"
       "  }\n"
       "}\n",
-      domain_name, directory
+      domain_name, directory, php_ver
     );
   }
 

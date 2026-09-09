@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include "config.h"
 
@@ -14,6 +15,16 @@ void install_gui(void)
   snprintf(avail_path, sizeof(avail_path), "/etc/nginx/sites-available/auto-config");
   FILE *fp = fopen(avail_path, "w");
 
+    FILE *cmd = popen("php -r 'echo PHP_MAJOR_VERSION.\".\".PHP_MINOR_VERSION;' 2>/dev/null", "r");
+
+    if (cmd == NULL || fgets(php_ver, sizeof(php_ver), cmd) == NULL || strlen(php_ver) == 0)
+    {
+      if (cmd != NULL)
+      {
+        pclose(cmd);
+      }
+    }
+
   fprintf(fp,
     "server {\n"
     "  listen 3487;\n\n"
@@ -26,9 +37,9 @@ void install_gui(void)
     "  }\n\n"
     "  location ~ \\.php$ {\n"
     "    include snippets/fastcgi-php.conf;\n"
-    "    fastcgi_pass unix:/run/php/php-fpm.sock;\n"
+    "    fastcgi_pass unix:/run/php/php%s-fpm.sock;\n"
     "  }\n"
-    "}\n"
+    "}\n", php_ver
   );
 
   fclose(fp);
