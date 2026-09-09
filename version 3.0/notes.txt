@@ -39,7 +39,7 @@ mv nap /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg/usr/local/b
 #change for respective version
 mkdir -p /mnt/code-projects/packages/auto-config/repository/releases/v3.0.0
 #output to releases      change per version
-dpkg-deb --build nap-pkg /mnt/code-projects/packages/auto-config/repository/releases/v3.0.0/auto-config_3.0.0_amd64.deb
+dpkg-deb --build /mnt/code-projects/packages/auto-config/'version 3.0'/nap-pkg /mnt/code-projects/packages/auto-config/repository/releases/v3.0.0/auto-config_3.0.0_amd64.deb
 
 git status
 
