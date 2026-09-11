@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "config.h"
+#include "/mnt/code-projects/packages/auto-config/version 3.0/config.h"
 
 void run_domain_name(void)
 {

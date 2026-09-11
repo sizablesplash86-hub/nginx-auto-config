@@ -1,0 +1,1 @@
+/mnt/code-projects/packages/auto-config/version 3.0/install.sh

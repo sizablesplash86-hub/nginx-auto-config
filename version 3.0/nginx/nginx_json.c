@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "config.h"
+#include "/mnt/code-projects/packages/auto-config/version 3.0/config.h"
 
 int handle_json_mode(const char *json_filepath) {
     FILE *f = fopen(json_filepath, "r");

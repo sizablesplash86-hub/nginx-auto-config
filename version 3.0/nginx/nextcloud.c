@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include "config.h"
+#include "/mnt/code-projects/packages/auto-config/version 3.0/config.h"
 
 void run_nextcloud(void)
 {

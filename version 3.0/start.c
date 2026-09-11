@@ -14,16 +14,6 @@ char enabled_path[256];
 char certbot_cmd[256];
 char lan_ip[256];
 
-int root_check()
-{
-  if (geteuid() != 0)
-  {
-    printf("\n\033[31mEnter root first\033[0m\n\n");
-    return 1;
-  }
-  return 0;
-}
-
 // from here
 int main(int argc, char *argv[])
 {
@@ -32,29 +22,35 @@ int main(int argc, char *argv[])
     return handle_json_mode(argv[2]);
   } //to here is part of the vibe coded GUI
 
-  char one;
-  if (root_check() != 0) return 0;
+  char web;
+  if (geteuid() != 0)
+  {
+    printf("\n\033[31mEnter root first\033[0m\n\n");
+    return 1;
+  }
   update();
 
-  printf("\nwelcome to N.A.P. %s!\n\n", CURRENT_VERSION);
+  printf("\nwelcome to the auto config %s!\n\n", CURRENT_VERSION);
   
-  if (system("ls /var/www/auto-config > /dev/null 2>&1") == 0)
+  if (system("ls /etc/nginx/sites-enabled/auto-config-gui > /dev/null 2>&1") == 0)
   {
     find_ip();
     printf("Visit \033[34mhttp://%s:3487\033[0m in your browser to use the GUI\n\n", lan_ip);
   }
 
 
-  printf("Would you like to pick between presets? y/n: ");
-  scanf(" %c", &one);
-  if (one == 'y')
+  printf("Input your web server. 1 for NGINX 2 for Pingora: ");
+  scanf(" %c", &web);
+  if (web == '1')
   {
-    run_presets();
+    nginx();
+    return 0;
   }
 
-  if (one == 'n')
+  if (web == '2')
   {
-    run_manual();
+    pingora();
+    return 0;
   }
 
   return 0;

@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Option A: Option 1 approach (Single executable compiled from multiple sources)
-add_executable(nap nginx_json.c start.c update.c lan-ip.c domain.c presets.c gui-install.c jellyfin.c plex.c nextcloud.c gui.c manual.c proxy.c directory.c certbot.c)
+add_executable(nap start.c update.c lan-ip.c pingora/pingora.c nginx/nginx.c nginx/nginx_json.c nginx/domain.c nginx/presets.c nginx/gui-install.c nginx/jellyfin.c nginx/plex.c nginx/nextcloud.c nginx/gui.c nginx/manual.c nginx/proxy.c nginx/directory.c nginx/certbot.c)
 
 # Option B: Option 2 approach (If you want two separate executables)
 # add_executable(start start.c)

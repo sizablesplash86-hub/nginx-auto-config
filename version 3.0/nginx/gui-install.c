@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "config.h"
+#include "/mnt/code-projects/packages/auto-config/version 3.0/config.h"
 
 void install_gui(void)
 {
@@ -58,8 +58,8 @@ void install_gui(void)
     return;
   }
 
-  system("curl -sSL https://repo.sizablesplash.com/auto-config/gui.html -o /var/www/auto-config/index.html");
-  system("curl -sSL https://repo.sizablesplash.com/auto-config/gui.php -o /var/www/auto-config/api.php");
+//system("curl -sSL https://repo.sizablesplash.com/auto-config/gui.html -o /var/www/auto-config/index.html");
+//system("curl -sSL https://repo.sizablesplash.com/auto-config/gui.php -o /var/www/auto-config/api.php");
 
   //test these
   system("echo 'www-data ALL=(ALL) NOPASSWD: /usr/local/bin/nginx-auto' | sudo tee /etc/sudoers.d/nginx-auto > /dev/null");

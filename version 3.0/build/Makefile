@@ -129,150 +129,6 @@ nap/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/build
 .PHONY : nap/fast
 
-certbot.o: certbot.c.o
-.PHONY : certbot.o
-
-# target to build an object file
-certbot.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/certbot.c.o
-.PHONY : certbot.c.o
-
-certbot.i: certbot.c.i
-.PHONY : certbot.i
-
-# target to preprocess a source file
-certbot.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/certbot.c.i
-.PHONY : certbot.c.i
-
-certbot.s: certbot.c.s
-.PHONY : certbot.s
-
-# target to generate assembly for a file
-certbot.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/certbot.c.s
-.PHONY : certbot.c.s
-
-directory.o: directory.c.o
-.PHONY : directory.o
-
-# target to build an object file
-directory.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/directory.c.o
-.PHONY : directory.c.o
-
-directory.i: directory.c.i
-.PHONY : directory.i
-
-# target to preprocess a source file
-directory.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/directory.c.i
-.PHONY : directory.c.i
-
-directory.s: directory.c.s
-.PHONY : directory.s
-
-# target to generate assembly for a file
-directory.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/directory.c.s
-.PHONY : directory.c.s
-
-domain.o: domain.c.o
-.PHONY : domain.o
-
-# target to build an object file
-domain.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.o
-.PHONY : domain.c.o
-
-domain.i: domain.c.i
-.PHONY : domain.i
-
-# target to preprocess a source file
-domain.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.i
-.PHONY : domain.c.i
-
-domain.s: domain.c.s
-.PHONY : domain.s
-
-# target to generate assembly for a file
-domain.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/domain.c.s
-.PHONY : domain.c.s
-
-gui-install.o: gui-install.c.o
-.PHONY : gui-install.o
-
-# target to build an object file
-gui-install.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui-install.c.o
-.PHONY : gui-install.c.o
-
-gui-install.i: gui-install.c.i
-.PHONY : gui-install.i
-
-# target to preprocess a source file
-gui-install.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui-install.c.i
-.PHONY : gui-install.c.i
-
-gui-install.s: gui-install.c.s
-.PHONY : gui-install.s
-
-# target to generate assembly for a file
-gui-install.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui-install.c.s
-.PHONY : gui-install.c.s
-
-gui.o: gui.c.o
-.PHONY : gui.o
-
-# target to build an object file
-gui.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui.c.o
-.PHONY : gui.c.o
-
-gui.i: gui.c.i
-.PHONY : gui.i
-
-# target to preprocess a source file
-gui.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui.c.i
-.PHONY : gui.c.i
-
-gui.s: gui.c.s
-.PHONY : gui.s
-
-# target to generate assembly for a file
-gui.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/gui.c.s
-.PHONY : gui.c.s
-
-jellyfin.o: jellyfin.c.o
-.PHONY : jellyfin.o
-
-# target to build an object file
-jellyfin.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.o
-.PHONY : jellyfin.c.o
-
-jellyfin.i: jellyfin.c.i
-.PHONY : jellyfin.i
-
-# target to preprocess a source file
-jellyfin.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.i
-.PHONY : jellyfin.c.i
-
-jellyfin.s: jellyfin.c.s
-.PHONY : jellyfin.s
-
-# target to generate assembly for a file
-jellyfin.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/jellyfin.c.s
-.PHONY : jellyfin.c.s
-
 lan-ip.o: lan-ip.c.o
 .PHONY : lan-ip.o
 
@@ -297,149 +153,341 @@ lan-ip.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/lan-ip.c.s
 .PHONY : lan-ip.c.s
 
-manual.o: manual.c.o
-.PHONY : manual.o
+nginx/certbot.o: nginx/certbot.c.o
+.PHONY : nginx/certbot.o
 
 # target to build an object file
-manual.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.o
-.PHONY : manual.c.o
+nginx/certbot.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/certbot.c.o
+.PHONY : nginx/certbot.c.o
 
-manual.i: manual.c.i
-.PHONY : manual.i
+nginx/certbot.i: nginx/certbot.c.i
+.PHONY : nginx/certbot.i
 
 # target to preprocess a source file
-manual.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.i
-.PHONY : manual.c.i
+nginx/certbot.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/certbot.c.i
+.PHONY : nginx/certbot.c.i
 
-manual.s: manual.c.s
-.PHONY : manual.s
+nginx/certbot.s: nginx/certbot.c.s
+.PHONY : nginx/certbot.s
 
 # target to generate assembly for a file
-manual.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/manual.c.s
-.PHONY : manual.c.s
+nginx/certbot.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/certbot.c.s
+.PHONY : nginx/certbot.c.s
 
-nextcloud.o: nextcloud.c.o
-.PHONY : nextcloud.o
+nginx/directory.o: nginx/directory.c.o
+.PHONY : nginx/directory.o
 
 # target to build an object file
-nextcloud.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.o
-.PHONY : nextcloud.c.o
+nginx/directory.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/directory.c.o
+.PHONY : nginx/directory.c.o
 
-nextcloud.i: nextcloud.c.i
-.PHONY : nextcloud.i
+nginx/directory.i: nginx/directory.c.i
+.PHONY : nginx/directory.i
 
 # target to preprocess a source file
-nextcloud.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.i
-.PHONY : nextcloud.c.i
+nginx/directory.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/directory.c.i
+.PHONY : nginx/directory.c.i
 
-nextcloud.s: nextcloud.c.s
-.PHONY : nextcloud.s
+nginx/directory.s: nginx/directory.c.s
+.PHONY : nginx/directory.s
 
 # target to generate assembly for a file
-nextcloud.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nextcloud.c.s
-.PHONY : nextcloud.c.s
+nginx/directory.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/directory.c.s
+.PHONY : nginx/directory.c.s
 
-nginx_json.o: nginx_json.c.o
-.PHONY : nginx_json.o
+nginx/domain.o: nginx/domain.c.o
+.PHONY : nginx/domain.o
 
 # target to build an object file
-nginx_json.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx_json.c.o
-.PHONY : nginx_json.c.o
+nginx/domain.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/domain.c.o
+.PHONY : nginx/domain.c.o
 
-nginx_json.i: nginx_json.c.i
-.PHONY : nginx_json.i
+nginx/domain.i: nginx/domain.c.i
+.PHONY : nginx/domain.i
 
 # target to preprocess a source file
-nginx_json.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx_json.c.i
-.PHONY : nginx_json.c.i
+nginx/domain.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/domain.c.i
+.PHONY : nginx/domain.c.i
 
-nginx_json.s: nginx_json.c.s
-.PHONY : nginx_json.s
+nginx/domain.s: nginx/domain.c.s
+.PHONY : nginx/domain.s
 
 # target to generate assembly for a file
-nginx_json.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx_json.c.s
-.PHONY : nginx_json.c.s
+nginx/domain.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/domain.c.s
+.PHONY : nginx/domain.c.s
 
-plex.o: plex.c.o
-.PHONY : plex.o
+nginx/gui-install.o: nginx/gui-install.c.o
+.PHONY : nginx/gui-install.o
 
 # target to build an object file
-plex.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/plex.c.o
-.PHONY : plex.c.o
+nginx/gui-install.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/gui-install.c.o
+.PHONY : nginx/gui-install.c.o
 
-plex.i: plex.c.i
-.PHONY : plex.i
+nginx/gui-install.i: nginx/gui-install.c.i
+.PHONY : nginx/gui-install.i
 
 # target to preprocess a source file
-plex.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/plex.c.i
-.PHONY : plex.c.i
+nginx/gui-install.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/gui-install.c.i
+.PHONY : nginx/gui-install.c.i
 
-plex.s: plex.c.s
-.PHONY : plex.s
+nginx/gui-install.s: nginx/gui-install.c.s
+.PHONY : nginx/gui-install.s
 
 # target to generate assembly for a file
-plex.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/plex.c.s
-.PHONY : plex.c.s
+nginx/gui-install.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/gui-install.c.s
+.PHONY : nginx/gui-install.c.s
 
-presets.o: presets.c.o
-.PHONY : presets.o
+nginx/gui.o: nginx/gui.c.o
+.PHONY : nginx/gui.o
 
 # target to build an object file
-presets.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/presets.c.o
-.PHONY : presets.c.o
+nginx/gui.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/gui.c.o
+.PHONY : nginx/gui.c.o
 
-presets.i: presets.c.i
-.PHONY : presets.i
+nginx/gui.i: nginx/gui.c.i
+.PHONY : nginx/gui.i
 
 # target to preprocess a source file
-presets.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/presets.c.i
-.PHONY : presets.c.i
+nginx/gui.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/gui.c.i
+.PHONY : nginx/gui.c.i
 
-presets.s: presets.c.s
-.PHONY : presets.s
+nginx/gui.s: nginx/gui.c.s
+.PHONY : nginx/gui.s
 
 # target to generate assembly for a file
-presets.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/presets.c.s
-.PHONY : presets.c.s
+nginx/gui.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/gui.c.s
+.PHONY : nginx/gui.c.s
 
-proxy.o: proxy.c.o
-.PHONY : proxy.o
+nginx/jellyfin.o: nginx/jellyfin.c.o
+.PHONY : nginx/jellyfin.o
 
 # target to build an object file
-proxy.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/proxy.c.o
-.PHONY : proxy.c.o
+nginx/jellyfin.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/jellyfin.c.o
+.PHONY : nginx/jellyfin.c.o
 
-proxy.i: proxy.c.i
-.PHONY : proxy.i
+nginx/jellyfin.i: nginx/jellyfin.c.i
+.PHONY : nginx/jellyfin.i
 
 # target to preprocess a source file
-proxy.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/proxy.c.i
-.PHONY : proxy.c.i
+nginx/jellyfin.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/jellyfin.c.i
+.PHONY : nginx/jellyfin.c.i
 
-proxy.s: proxy.c.s
-.PHONY : proxy.s
+nginx/jellyfin.s: nginx/jellyfin.c.s
+.PHONY : nginx/jellyfin.s
 
 # target to generate assembly for a file
-proxy.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/proxy.c.s
-.PHONY : proxy.c.s
+nginx/jellyfin.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/jellyfin.c.s
+.PHONY : nginx/jellyfin.c.s
+
+nginx/manual.o: nginx/manual.c.o
+.PHONY : nginx/manual.o
+
+# target to build an object file
+nginx/manual.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/manual.c.o
+.PHONY : nginx/manual.c.o
+
+nginx/manual.i: nginx/manual.c.i
+.PHONY : nginx/manual.i
+
+# target to preprocess a source file
+nginx/manual.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/manual.c.i
+.PHONY : nginx/manual.c.i
+
+nginx/manual.s: nginx/manual.c.s
+.PHONY : nginx/manual.s
+
+# target to generate assembly for a file
+nginx/manual.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/manual.c.s
+.PHONY : nginx/manual.c.s
+
+nginx/nextcloud.o: nginx/nextcloud.c.o
+.PHONY : nginx/nextcloud.o
+
+# target to build an object file
+nginx/nextcloud.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nextcloud.c.o
+.PHONY : nginx/nextcloud.c.o
+
+nginx/nextcloud.i: nginx/nextcloud.c.i
+.PHONY : nginx/nextcloud.i
+
+# target to preprocess a source file
+nginx/nextcloud.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nextcloud.c.i
+.PHONY : nginx/nextcloud.c.i
+
+nginx/nextcloud.s: nginx/nextcloud.c.s
+.PHONY : nginx/nextcloud.s
+
+# target to generate assembly for a file
+nginx/nextcloud.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nextcloud.c.s
+.PHONY : nginx/nextcloud.c.s
+
+nginx/nginx.o: nginx/nginx.c.o
+.PHONY : nginx/nginx.o
+
+# target to build an object file
+nginx/nginx.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nginx.c.o
+.PHONY : nginx/nginx.c.o
+
+nginx/nginx.i: nginx/nginx.c.i
+.PHONY : nginx/nginx.i
+
+# target to preprocess a source file
+nginx/nginx.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nginx.c.i
+.PHONY : nginx/nginx.c.i
+
+nginx/nginx.s: nginx/nginx.c.s
+.PHONY : nginx/nginx.s
+
+# target to generate assembly for a file
+nginx/nginx.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nginx.c.s
+.PHONY : nginx/nginx.c.s
+
+nginx/nginx_json.o: nginx/nginx_json.c.o
+.PHONY : nginx/nginx_json.o
+
+# target to build an object file
+nginx/nginx_json.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nginx_json.c.o
+.PHONY : nginx/nginx_json.c.o
+
+nginx/nginx_json.i: nginx/nginx_json.c.i
+.PHONY : nginx/nginx_json.i
+
+# target to preprocess a source file
+nginx/nginx_json.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nginx_json.c.i
+.PHONY : nginx/nginx_json.c.i
+
+nginx/nginx_json.s: nginx/nginx_json.c.s
+.PHONY : nginx/nginx_json.s
+
+# target to generate assembly for a file
+nginx/nginx_json.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/nginx_json.c.s
+.PHONY : nginx/nginx_json.c.s
+
+nginx/plex.o: nginx/plex.c.o
+.PHONY : nginx/plex.o
+
+# target to build an object file
+nginx/plex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/plex.c.o
+.PHONY : nginx/plex.c.o
+
+nginx/plex.i: nginx/plex.c.i
+.PHONY : nginx/plex.i
+
+# target to preprocess a source file
+nginx/plex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/plex.c.i
+.PHONY : nginx/plex.c.i
+
+nginx/plex.s: nginx/plex.c.s
+.PHONY : nginx/plex.s
+
+# target to generate assembly for a file
+nginx/plex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/plex.c.s
+.PHONY : nginx/plex.c.s
+
+nginx/presets.o: nginx/presets.c.o
+.PHONY : nginx/presets.o
+
+# target to build an object file
+nginx/presets.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/presets.c.o
+.PHONY : nginx/presets.c.o
+
+nginx/presets.i: nginx/presets.c.i
+.PHONY : nginx/presets.i
+
+# target to preprocess a source file
+nginx/presets.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/presets.c.i
+.PHONY : nginx/presets.c.i
+
+nginx/presets.s: nginx/presets.c.s
+.PHONY : nginx/presets.s
+
+# target to generate assembly for a file
+nginx/presets.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/presets.c.s
+.PHONY : nginx/presets.c.s
+
+nginx/proxy.o: nginx/proxy.c.o
+.PHONY : nginx/proxy.o
+
+# target to build an object file
+nginx/proxy.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/proxy.c.o
+.PHONY : nginx/proxy.c.o
+
+nginx/proxy.i: nginx/proxy.c.i
+.PHONY : nginx/proxy.i
+
+# target to preprocess a source file
+nginx/proxy.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/proxy.c.i
+.PHONY : nginx/proxy.c.i
+
+nginx/proxy.s: nginx/proxy.c.s
+.PHONY : nginx/proxy.s
+
+# target to generate assembly for a file
+nginx/proxy.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/nginx/proxy.c.s
+.PHONY : nginx/proxy.c.s
+
+pingora/pingora.o: pingora/pingora.c.o
+.PHONY : pingora/pingora.o
+
+# target to build an object file
+pingora/pingora.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/pingora/pingora.c.o
+.PHONY : pingora/pingora.c.o
+
+pingora/pingora.i: pingora/pingora.c.i
+.PHONY : pingora/pingora.i
+
+# target to preprocess a source file
+pingora/pingora.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/pingora/pingora.c.i
+.PHONY : pingora/pingora.c.i
+
+pingora/pingora.s: pingora/pingora.c.s
+.PHONY : pingora/pingora.s
+
+# target to generate assembly for a file
+pingora/pingora.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/nap.dir/build.make CMakeFiles/nap.dir/pingora/pingora.c.s
+.PHONY : pingora/pingora.c.s
 
 start.o: start.c.o
 .PHONY : start.o
@@ -498,45 +546,51 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... nap"
-	@echo "... certbot.o"
-	@echo "... certbot.i"
-	@echo "... certbot.s"
-	@echo "... directory.o"
-	@echo "... directory.i"
-	@echo "... directory.s"
-	@echo "... domain.o"
-	@echo "... domain.i"
-	@echo "... domain.s"
-	@echo "... gui-install.o"
-	@echo "... gui-install.i"
-	@echo "... gui-install.s"
-	@echo "... gui.o"
-	@echo "... gui.i"
-	@echo "... gui.s"
-	@echo "... jellyfin.o"
-	@echo "... jellyfin.i"
-	@echo "... jellyfin.s"
 	@echo "... lan-ip.o"
 	@echo "... lan-ip.i"
 	@echo "... lan-ip.s"
-	@echo "... manual.o"
-	@echo "... manual.i"
-	@echo "... manual.s"
-	@echo "... nextcloud.o"
-	@echo "... nextcloud.i"
-	@echo "... nextcloud.s"
-	@echo "... nginx_json.o"
-	@echo "... nginx_json.i"
-	@echo "... nginx_json.s"
-	@echo "... plex.o"
-	@echo "... plex.i"
-	@echo "... plex.s"
-	@echo "... presets.o"
-	@echo "... presets.i"
-	@echo "... presets.s"
-	@echo "... proxy.o"
-	@echo "... proxy.i"
-	@echo "... proxy.s"
+	@echo "... nginx/certbot.o"
+	@echo "... nginx/certbot.i"
+	@echo "... nginx/certbot.s"
+	@echo "... nginx/directory.o"
+	@echo "... nginx/directory.i"
+	@echo "... nginx/directory.s"
+	@echo "... nginx/domain.o"
+	@echo "... nginx/domain.i"
+	@echo "... nginx/domain.s"
+	@echo "... nginx/gui-install.o"
+	@echo "... nginx/gui-install.i"
+	@echo "... nginx/gui-install.s"
+	@echo "... nginx/gui.o"
+	@echo "... nginx/gui.i"
+	@echo "... nginx/gui.s"
+	@echo "... nginx/jellyfin.o"
+	@echo "... nginx/jellyfin.i"
+	@echo "... nginx/jellyfin.s"
+	@echo "... nginx/manual.o"
+	@echo "... nginx/manual.i"
+	@echo "... nginx/manual.s"
+	@echo "... nginx/nextcloud.o"
+	@echo "... nginx/nextcloud.i"
+	@echo "... nginx/nextcloud.s"
+	@echo "... nginx/nginx.o"
+	@echo "... nginx/nginx.i"
+	@echo "... nginx/nginx.s"
+	@echo "... nginx/nginx_json.o"
+	@echo "... nginx/nginx_json.i"
+	@echo "... nginx/nginx_json.s"
+	@echo "... nginx/plex.o"
+	@echo "... nginx/plex.i"
+	@echo "... nginx/plex.s"
+	@echo "... nginx/presets.o"
+	@echo "... nginx/presets.i"
+	@echo "... nginx/presets.s"
+	@echo "... nginx/proxy.o"
+	@echo "... nginx/proxy.i"
+	@echo "... nginx/proxy.s"
+	@echo "... pingora/pingora.o"
+	@echo "... pingora/pingora.i"
+	@echo "... pingora/pingora.s"
 	@echo "... start.o"
 	@echo "... start.i"
 	@echo "... start.s"

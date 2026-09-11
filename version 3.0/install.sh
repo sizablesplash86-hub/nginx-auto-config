@@ -119,5 +119,5 @@ EOF
 fi
 
 echo "=================================================="
-echo "Installation completed successfully!"
+echo "Installation completed successfully! Run 'nginx-auto' to run the program"
 echo "=================================================="
