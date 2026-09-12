@@ -8,13 +8,14 @@ void pingora(void)
 {
   // REMOVE THIS SECTION
   char ent;
-  printf("The Pingora auto config is in testing and not fully setup yet. Would you like to continue? ");
+  printf("The Pingora auto config is in testing and not fully setup yet. Would you like to continue? y/n: ");
   scanf(" %c", &ent);
   if (ent == 'n')
   {
     return;
   }  //
 
+  // cargo run         to run it btw
   char ping;
   if (system("ls -d /etc/pingora > /dev/null 2>&1") != 0)
   {
@@ -129,9 +130,9 @@ void pingora(void)
 
       system("sudo systemctl daemon-reload");
       system("sudo systemctl enable pingora.service --quiet");
-      if (system("sudo systemctl start pingora.service") !=0)
+      if (system("sudo systemctl start pingora.service") != 0)
       {
-        printf("pingora failed to install.");
+        printf("\033[31mERROR\033[0m pingora failed to install.");
         system("rm -rf /var/log/pingora && rm -rf /etc/pingora");
         return;
       }
@@ -153,24 +154,70 @@ void pingora(void)
     printf("\nWeb server options:\n1) Presets\n2) manual proxy/directory\n\nPingora system:\n3) Pingora status\n4) Restart Pingora\n5) View console log\n6) Purge Pingora\n7) Exit\nInput choice: ");
   }
   char opt;
-  scanf(" %c", &opt);  // read chapter 5
+  scanf(" %c", &opt);
 
-  //presets
+  // presets
   if (opt == '1')
   {
-    printf("");
+    printf("Not setup yet\n\n");
   }
 
+  // manual
   if (opt == '2')
   {
     //
   }
 
-  //status
+  // status
   if (opt == '3')
   {
-    printf("Press ctrl + C to exit\n");
+    //printf("Press ctrl + C to exit\n");
+    system("sudo systemctl status pingora");
+    return;
+  }
 
+  // restart
+  if (opt == '4')
+  {
+    if (system("sudo systemctl restart pingora") != 0)
+    {
+      printf("\033[31mERROR\033[0m Failed to restart Pingora\n\n");
+      return;
+    }
+    else
+    {
+      printf("Restarted Pingora!\n\n");
+    }
+  }
+
+  // log
+  if (opt == '5')
+  {
+    system("journalctl -u pingora.service -f -n 50");
+    return;
+  }
+
+  // purge
+  char conf;
+  if (opt == '6')
+  {
+    printf("Are you sure you want to remove Pingora? y/n: ");
+    scanf(" %c", &conf);
+    if (conf == 'y')
+    {
+      system("rm -rf /etc/pingora && rm -rf /var/log/pingora");
+      return;
+    }
+    else
+    {
+      return;
+    }
+  }
+
+  // exit
+  if (opt == '7')
+  {
+    return;
   }
 
   return;
