@@ -71,7 +71,7 @@ void run_directory(void)
 
   fclose(fp);
 
-  snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled");
+  snprintf(enabled_path, sizeof(enabled_path), "/etc/nginx/sites-enabled/%s", config_name);
   symlink(avail_path, enabled_path);
 
   certbot();
