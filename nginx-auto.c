@@ -6,6 +6,7 @@
 #include <string.h> //chapter 23.6 page 615 appendix 785
 #include <stdlib.h> //chapter 26.2 682
 #include <ctype.h> //chapter 7 somewhere
+#include <stdbool.h> // used for boolean values 
 
 /*
 #include "config.h" //chapter 15.2 p.350   no longer needed, I'll leave it tho*/
@@ -21,6 +22,8 @@ char config_type_input[STR_LEN];
 char preset[STR_LEN];
 char preset_choice[STR_LEN];
 char php_ver[STR_LEN];
+
+bool ask_y_n(void);
 
 void get_nginx_test_error(char *buffer, size_t max_len)  //size_t is not a character and is a function mentioned on p.151 chapter 7.6
 {
@@ -63,11 +66,7 @@ void check_for_updates(void) {
         printf("Update detected! (%s -> %s)\n", CURRENT_VERSION, latest_version);
         printf("Would you like to upgrade? (y/n): ");
 
-        char ans;
-        scanf(" %c", &ans);
-        while (getchar() != '\n');
-
-        if (ans == 'y' || ans == 'Y') {
+        if (ask_y_n()) {
             printf("\nDownloading and installing latest package...\n");
 
             /*char update_cmd[1024];
@@ -100,12 +99,11 @@ void check_for_updates(void) {
 
 void offer_troubleshooting(const char *error_log)
 {
-  char ans;
-  char usr[STR_LEN];
+  char usr[STR_LEN]; // (unused)
   printf("Would you like to send a discord notification to me for troubleshooting? (y or n): ");
-  scanf(" %c", &ans); //chapter 7.3 page 139
+  // chapter 7.3 page 139
 
-  if (ans == 'y')
+  if (ask_y_n())
   {
 /*  printf("Enter a nickname: ");
     scanf(" %255s", usr);
@@ -152,7 +150,7 @@ void offer_troubleshooting(const char *error_log)
       printf("\033[31mERROR\033[0m Message failed to send.\n\n");
     } */
   }
-  if (ans == 'n')
+  else
   {
     printf("Log not sent. Exiting now...\n\n");
   }
@@ -605,4 +603,22 @@ int main()
     printf("ROOT SYSTEM NOT DETECTED! Run the command 'su' before attempting again\n\n");
   }
   return 0;
+}
+
+bool ask_y_n(void)
+{
+  char input[128];
+  if (fgets(input, sizeof input, stdin) != NULL)
+  {
+    char ans = input[0];
+    
+    if (ans == 'y' || ans == 'Y')
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
 }
